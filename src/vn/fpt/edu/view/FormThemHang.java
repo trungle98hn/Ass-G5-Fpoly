@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vn.fpt.edu.connect.Connect;
+import vn.fpt.edu.process.ThemHang;
 
 /**
  *
@@ -187,11 +188,19 @@ String maUser = null;
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        ThemHang();
+        Add();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
+       txtDonGia.setText("");
+       txtHangSanXuat.setText("");
+       txtMaHang.setText("");
+       txtSoLuong.setText("");
+       txtTenHang.setText("");
+       cbDonVi.setSelectedIndex(0);
+       jDateChooser1.setDate(new java.util.Date());
+       jDateChooser2.setDate(new java.util.Date());
+       
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
@@ -201,14 +210,11 @@ String maUser = null;
         t.setSize(900, 500);
         t.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnQuayLaiActionPerformed
-public void ThemHang(){
-String sql="insert into hanghoa values(?,?,?,?,?,?,?,?)";
-        try {
-            PreparedStatement stm=cn.prepareStatement(sql);
-            
-            stm.setString(1, txtMaHang.getText());
-            stm.setString(2, txtTenHang.getText());
-            String donvi=null;
+public void Add(){
+ SimpleDateFormat geekonjavadate = new SimpleDateFormat("yyyy/MM/dd");
+ String gojdate = geekonjavadate .format(jDateChooser1.getDate());
+ String gojdate2 = geekonjavadate .format(jDateChooser2.getDate());
+ String donvi=null;
             if(cbDonVi.getSelectedIndex()==0){
                 donvi="Kg";
             }
@@ -218,29 +224,8 @@ String sql="insert into hanghoa values(?,?,?,?,?,?,?,?)";
             else{
                 donvi="cái";
             }
-            stm.setString(3, donvi);
-           
-        
-           SimpleDateFormat geekonjavadate = new SimpleDateFormat("yyyy/MM/dd");
- String gojdate = geekonjavadate .format(jDateChooser1.getDate());
- String gojdate2 = geekonjavadate .format(jDateChooser2.getDate());
- //JOptionPane.showMessageDialog(null, "Your selected date is "+gojdate);
-           // String dateinput=new SimpleDateFormat("yyyy-mm-dd").format(date);
-            stm.setString(4, gojdate+"");
-            stm.setString(5,txtHangSanXuat.getText());
-            stm.setString(6, gojdate2);
-            stm.setString(7, txtSoLuong.getText());
-          stm.setString(8, txtDonGia.getText());
-          stm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "đã lưu");
+            ThemHang th=new ThemHang(txtMaHang.getText(), txtTenHang.getText(), donvi, gojdate, txtHangSanXuat.getText(), gojdate2, txtSoLuong.getText(), txtDonGia.getText());
             
-          //  JOptionPane.showMessageDialog(null, "đã lưu");
-           
-        } catch (SQLException ex) {
-            Logger.getLogger(FormThemNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println();
-           
-        }
 }
 public void close(){
 this.dispose();

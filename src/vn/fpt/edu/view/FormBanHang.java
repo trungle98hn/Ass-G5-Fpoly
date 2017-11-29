@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.util.Date;
+import vn.fpt.edu.process.*;
 
 /**
  *
@@ -34,7 +35,7 @@ public class FormBanHang extends javax.swing.JFrame {
     ResultSet rs = null;
     Connect cn = new Connect();
     Connection cnn = cn.getConnect();
-    int maHd;
+
     String mdh;
 
     /**
@@ -42,14 +43,13 @@ public class FormBanHang extends javax.swing.JFrame {
      */
     public FormBanHang() {
         initComponents();
-        maHd = rand(0, 99999);
-        lblmaHd.setText(maHd + "");
-        JOptionPane.showMessageDialog(null, maHd);
+        int i = jTable1.getSelectedRow();
         jLabel2.setVisible(false);
-
-        ThemHDX();
-        getDataGioHang();
-
+        HoaDonXuat tm = new HoaDonXuat();
+        tm.getMhd();
+        tm.headerTable();
+        tm.getData();
+        tm.TongTien(i);
         //  String a=(String) jSpinner1.getValue();
         //  int giatien=Integer.parseInt(txtGia.getText())*Integer.parseInt(a);
         // JOptionPane.showMessageDialog(null, a);
@@ -94,8 +94,8 @@ public class FormBanHang extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        txtTongtien = new javax.swing.JLabel();
         lblGia1 = new javax.swing.JLabel();
+        lblgia = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -327,6 +327,8 @@ public class FormBanHang extends javax.swing.JFrame {
         lblGia1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblGia1.setText("Tổng tiền:");
 
+        lblgia.setText("0");
+
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
@@ -338,10 +340,10 @@ public class FormBanHang extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlMainLayout.createSequentialGroup()
-                                .addGap(0, 656, Short.MAX_VALUE)
+                                .addGap(0, 654, Short.MAX_VALUE)
                                 .addComponent(lblGia1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(lblgia, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1)))
                     .addComponent(pnltop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -357,10 +359,10 @@ public class FormBanHang extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlMainLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtTongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGia1))
+                        .addGap(40, 40, 40)
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGia1)
+                            .addComponent(lblgia))
                         .addContainerGap(23, Short.MAX_VALUE))))
         );
 
@@ -391,63 +393,26 @@ public class FormBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
         ThemHang();
+
         txtGia.setText("");
         txtHSD.setText("");
         txtNSX.setText("");
         txtNgaySX.setText("");
         txtTenHang.setText("");
-        txtTongtien.setText("");
+        int i = jTable1.getRowCount();
         txtTrongLuong.setText("");
         jSpinner1.setValue(0);
         jTextField1.setText("");
-        getDataGioHang();
+        HoaDonXuat hdx = new HoaDonXuat();
+
+        jTable1.setModel(new DefaultTableModel(hdx.headerTable(), hdx.getData()));
+        hdx.TongTien(i);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-       String sql="select thanhtien from chitiethdx where mahdx="+maHd+"";
-       int tien = 0;
-       int tien1 = 0;
-        int b = 0;
-       Vector a=new Vector();
-            Vector c=new Vector();
-            int i=jTable1.getRowCount();
-      
-      
-        try {
-            stm=cnn.prepareStatement(sql);
-            rs=stm.executeQuery();
-            while(rs.next()){
-                a.add(rs.getInt(1));
-             
-                      
-                System.out.println("a" +a);
-               // tien+=tien;
-            }
-           for(int k=0;k<i;k++){
-            System.out.println("for :"+a.elementAt(k));
-            tien=(int) a.elementAt(k);
-           b=tien+b;
-            System.out.println(b);
-           }
-           
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String sql2="update hoadonxuat set gia="+b+" where mahdx="+maHd+"";
-        try {
-            stm=cnn.prepareStatement(sql2);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        close();
-        FormBanHang t = new FormBanHang();
-        t.setVisible(true);
-        t.setSize(900, 500);
-        t.setLocationRelativeTo(null);
+        //thanhtoan();
+
     }//GEN-LAST:event_btnThanhToanActionPerformed
     public void Tim() {
         String sql = "select * from hanghoa where mahanghoa=?";
@@ -489,85 +454,129 @@ public class FormBanHang extends javax.swing.JFrame {
     public void close() {
         this.dispose();
     }
-
-    public void getDataGioHang() {
-        String sql = "Select * from chitietHDX  where mahdx=?";
-        Vector head = new Vector();
-        Vector head1 = new Vector();
-        Vector data = new Vector();
-        head.add("mã HDX");
-        head.add("Đơn giá");
-        head.add("Số lượng");
-        head.add("Mã Hàng");
-        head.add("Thành tiền");
-
-        try {
-            stm = cnn.prepareStatement(sql);
-            stm.setString(1, maHd + "");
-            rs = stm.executeQuery();
-
-//đéo hiểu sao query ra 2 cái giống nhau :3 
-            while (rs.next()) {
-
-                ChiTietHDX cthdx = new ChiTietHDX(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
-                data.add(cthdx.getMaHDX());
-                data.add(cthdx.getGiatien());
-                data.add(cthdx.getSoluonghang());
-                data.add(cthdx.getMahanghoa());
-                data.add(cthdx.getThanhtien());
-                head1.add(data);
-            }
-
-            jTable1.setModel(new DefaultTableModel(head1, head));
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+//public void thanhtoan(){
+// String sql="select thanhtien from chitiethdx where mahdx="+maHd+"";
+//       int tien = 0;
+//       
+//        int b = 0;
+//       Vector a=new Vector();
+//            Vector c=new Vector();
+//            int i=jTable1.getRowCount();
+//      
+//      
+//        try {
+//            stm=cnn.prepareStatement(sql);
+//            rs=stm.executeQuery();
+//            while(rs.next()){
+//                a.add(rs.getInt(1));
+//             
+//                      
+//                System.out.println("a" +a);
+//               // tien+=tien;
+//            }
+//           for(int k=0;k<i;k++){
+//            System.out.println("for :"+a.elementAt(k));
+//            tien=(int) a.elementAt(k);
+//           b=tien+b;
+//            System.out.println(b);
+//           }
+//           lblgia.setText(b+"");
+//           
+//        } catch (SQLException ex) {
+//            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        String sql2="update hoadonxuat set gia="+b+" where mahdx="+maHd+"";
+//        try {
+//            stm=cnn.prepareStatement(sql2);
+//            
+//        } catch (SQLException ex) {
+//            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        close();
+//        FormBanHang t = new FormBanHang();
+//        t.setVisible(true);
+//        t.setSize(900, 500);
+//        t.setLocationRelativeTo(null);
+//
+//}
+//    public void getDataGioHang() {
+//        String sql = "Select * from chitietHDX  where mahdx=?";
+//        Vector head = new Vector();
+//        Vector head1 = new Vector();
+//        Vector data = new Vector();
+//        head.add("mã HDX");
+//        head.add("Đơn giá");
+//        head.add("Số lượng");
+//        head.add("Mã Hàng");
+//        head.add("Thành tiền");
+//
+//        try {
+//            stm = cnn.prepareStatement(sql);
+//            stm.setString(1, maHd + "");
+//            rs = stm.executeQuery();
+//
+////đéo hiểu sao query ra 2 cái giống nhau :3 
+//            while (rs.next()) {
+//
+//                ChiTietHDX cthdx = new ChiTietHDX(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+//                data.add(cthdx.getMaHDX());
+//                data.add(cthdx.getGiatien());
+//                data.add(cthdx.getSoluonghang());
+//                data.add(cthdx.getMahanghoa());
+//                data.add(cthdx.getThanhtien());
+//                head1.add(data);
+//            }
+//
+//            jTable1.setModel(new DefaultTableModel(head1, head));
+//        } catch (SQLException ex) {
+//            System.out.println(ex);
+//            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        String sql1="select thanhtien from chitiethdx where mahdx="+maHd+"";
+//       int tien = 0;
+//       
+//        int b = 0;
+//       Vector a=new Vector();
+//            Vector c=new Vector();
+//            int i=jTable1.getRowCount();
+//      
+//      
+//        try {
+//            stm=cnn.prepareStatement(sql1);
+//            rs=stm.executeQuery();
+//            while(rs.next()){
+//                a.add(rs.getInt(1));
+//             
+//                      
+//                System.out.println("a" +a);
+//               // tien+=tien;
+//            }
+//           for(int k=0;k<i;k++){
+//            System.out.println("for :"+a.elementAt(k));
+//            tien=(int) a.elementAt(k);
+//           b=tien+b;
+//            System.out.println(b);
+//           }
+//           lblgia.setText(b+"");
+//           
+//        } catch (SQLException ex) {
+//            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
     public void ThemHang() {
+
         int a = Integer.parseInt(txtGia.getText());
         int b = (int) jSpinner1.getValue();
-        String sql = "insert into ChitietHDX values(" + maHd + ",?,?,?," + a * b + ")";
-        try {
-            stm = cnn.prepareStatement(sql);
-            stm.setString(1, txtGia.getText());
-            stm.setString(2, jSpinner1.getValue() + "");
-            stm.setString(3, jTextField1.getText());
-            stm.executeUpdate();
+        HoaDonXuat hdx = new HoaDonXuat();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ThemHangVaoGio m = new ThemHangVaoGio(hdx.getMhd(), txtGia.getText(), jSpinner1.getValue() + "", jTextField1.getText(), a * b + "");
 
     }
 
-    public void ThemHDX() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = new Date();
-        String goidate = dateFormat.format(date);
-        String sql = "insert into hoadonxuat values(" + lblmaHd.getText() + ",'" + goidate + "',1,null)";
-        try {
-            stm = cnn.prepareStatement(sql);
-            stm.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public static int rand(int min, int max) {
-        try {
-            Random rn = new Random();
-            int range = max - min + 1;
-            int randomNum = min + rn.nextInt(range);
-            return randomNum;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-
-    }
     /**
      * @param args the command line arguments
      */
@@ -595,6 +604,7 @@ public class FormBanHang extends javax.swing.JFrame {
     private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTenHang;
     private javax.swing.JLabel lblTrongLuong;
+    private javax.swing.JLabel lblgia;
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnltop;
@@ -603,7 +613,6 @@ public class FormBanHang extends javax.swing.JFrame {
     private javax.swing.JLabel txtNSX;
     private javax.swing.JLabel txtNgaySX;
     private javax.swing.JLabel txtTenHang;
-    private javax.swing.JLabel txtTongtien;
     private javax.swing.JTextField txtTrongLuong;
     // End of variables declaration//GEN-END:variables
 }

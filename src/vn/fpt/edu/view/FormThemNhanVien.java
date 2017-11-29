@@ -7,6 +7,8 @@ package vn.fpt.edu.view;
 import vn.fpt.edu.view.FormQuanLy;
 import java.sql.Connection;
 import vn.fpt.edu.connect.Connect;
+import vn.fpt.edu.beans.*;
+import vn.fpt.edu.process.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -244,47 +246,8 @@ public class FormThemNhanVien extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        String sql="insert into users values(?,?,?,?,?,?,?,?,?)";
-        try {
-            PreparedStatement stm=cn.prepareStatement(sql);
-            
-            stm.setString(1, txtMaNhanVien.getText());
-            stm.setString(2, txtTenNhanVien.getText());
-            stm.setString(3, txtSDT.getText());
-            stm.setString(4, txtDiaChi.getText());
-        // java.util.Date date=   jDateChooser1.getDate();
-          // jDateChooser1.setDateFormatString("yyyy-mm-dd");
-           SimpleDateFormat geekonjavadate = new SimpleDateFormat("yyyy/MM/dd");
- String gojdate = geekonjavadate .format(jDateChooser1.getDate());
- //JOptionPane.showMessageDialog(null, "Your selected date is "+gojdate);
-           // String dateinput=new SimpleDateFormat("yyyy-mm-dd").format(date);
-            stm.setString(5, gojdate+"");
-            if(jRadioButton1.isSelected()){
-            stm.setString(9, "nam");
-            }
-            else
-            {
-            stm.setString(9, "nu");
-            }
-            stm.setString(7, txtMatKhau.getText());
-            stm.setString(8, txtTaiKhoan.getText());
-            if(cbbChucVU.getSelectedIndex()==0){
-            stm.setString(6, "Nhân viên");
-            }
-            else
-            {
-            stm.setString(6, "Quản lý");
-            }
-            JOptionPane.showMessageDialog(null, "đã lưu");
-            stm.executeUpdate();
-          //  JOptionPane.showMessageDialog(null, "đã lưu");
-           
-        } catch (SQLException ex) {
-            Logger.getLogger(FormThemNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println();
-           
-        }
-        
+        add();
+  
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void cbbChucVUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbChucVUActionPerformed
@@ -304,6 +267,30 @@ public class FormThemNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 public void close(){
 this.dispose();
+
+
+}
+public void add(){
+   SimpleDateFormat geekonjavadate = new SimpleDateFormat("yyyy/MM/dd");
+ String gojdate = geekonjavadate .format(jDateChooser1.getDate());
+ String chucvu,gioitinh;
+        if(jRadioButton1.isSelected()){
+            gioitinh="nam";
+            }
+            else
+            {
+            gioitinh="nu";
+            }
+        if(cbbChucVU.getSelectedIndex()==0){
+            chucvu= "Nhân viên";
+            }
+            else
+            {
+            chucvu= "Quản lý";
+            }
+        ThemNhanVien m=new ThemNhanVien(txtMaNhanVien.getText(), txtTenNhanVien.getText(), txtSDT.getText(), txtDiaChi.getText(), gojdate, chucvu, txtMatKhau.getText(),
+                txtTaiKhoan.getText(), gioitinh);
+           
 
 }
     /**

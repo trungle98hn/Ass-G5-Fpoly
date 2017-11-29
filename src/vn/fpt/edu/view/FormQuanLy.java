@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import vn.fpt.edu.connect.Connect;
+import vn.fpt.edu.process.LayduLieuNhanVien;
+import vn.fpt.edu.process.XoaNhanVien;
 
 /**
  *
@@ -32,14 +34,9 @@ public class FormQuanLy extends javax.swing.JFrame {
      * Creates new form FormQuanLy
      */
     public FormQuanLy() {
-        tittle.add("Mã");
-        tittle.add("ten");
-        tittle.add("sdt");
-        tittle.add("email");
-        tittle.add("ngay sinh");
-        tittle.add("chuc vu");
+       
         initComponents();
-        getData();
+        layData();
 
     }
 
@@ -48,30 +45,19 @@ public class FormQuanLy extends javax.swing.JFrame {
         int a = tableList.getSelectedRow();
         maUser = tableList.getValueAt(a, 1) + "";
         //System.out.println(maUser);
-       
+
         return maUser;
     }
 
-    public void getData() {
-        String sql = "select * from users";
-        try {
-            stm = cn.prepareStatement(sql);
-            rs = stm.executeQuery();
-            Vector data = new Vector();
-            while (rs.next()) {
-                Vector user = new Vector();
-                user.addElement(rs.getString(1));
-                user.addElement(rs.getString(2));
-                user.addElement(rs.getString(3));
-                user.addElement(rs.getString(4));
-                user.addElement(rs.getString(5));
-                user.addElement(rs.getString(6));
-                data.add(user);
-            }
-            tableList.setModel(new DefaultTableModel(data, tittle));
-        } catch (SQLException ex) {
-            Logger.getLogger(FormQuanLy.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void layData() {
+         tittle.add("Mã");
+        tittle.add("ten");
+        tittle.add("sdt");
+        tittle.add("email");
+        tittle.add("ngay sinh");
+        tittle.add("chuc vu");
+        LayduLieuNhanVien ldlnv = new LayduLieuNhanVien();
+        tableList.setModel(new DefaultTableModel(ldlnv.LayduLieuNhanVien(), tittle));
     }
 
     /**
@@ -216,25 +202,15 @@ public class FormQuanLy extends javax.swing.JFrame {
         t.setVisible(true);
         t.setSize(380, 500);
         t.setLocationRelativeTo(null);
-        getData();
+        layData();
         this.dispose();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        String sql = "delete from users where mauser=?";
+
         int row = tableList.getSelectedRow();
-
-        try {
-            stm = cn.prepareStatement(sql);
-
-            stm.setString(1, (String) tableList.getValueAt(row, 2));
-            stm.executeUpdate();
-            stm.close();
-            getData();
-            JOptionPane.showMessageDialog(null, "ok");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+        String mauser = (String) tableList.getValueAt(row, 2);
+        XoaNhanVien xnv = new XoaNhanVien(mauser);
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
