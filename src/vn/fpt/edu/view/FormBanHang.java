@@ -7,14 +7,21 @@ package vn.fpt.edu.view;
 
 import vn.fpt.edu.connect.Connect;
 import vn.fpt.edu.view.*;
+import vn.fpt.edu.beans.ChiTietHDX;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.util.Date;
 
 /**
  *
@@ -22,17 +29,30 @@ import javax.swing.JTextField;
  */
 public class FormBanHang extends javax.swing.JFrame {
 
+    JLabel lblmaHd = new JLabel();
     PreparedStatement stm = null;
     ResultSet rs = null;
     Connect cn = new Connect();
+    Connection cnn = cn.getConnect();
+    int maHd;
+    String mdh;
 
     /**
      * Creates new form FormBanHang
      */
     public FormBanHang() {
         initComponents();
+        maHd = rand(0, 99999);
+        lblmaHd.setText(maHd + "");
+        JOptionPane.showMessageDialog(null, maHd);
         jLabel2.setVisible(false);
-        jSpinner1.setEnabled(false);
+
+        ThemHDX();
+        getDataGioHang();
+
+        //  String a=(String) jSpinner1.getValue();
+        //  int giatien=Integer.parseInt(txtGia.getText())*Integer.parseInt(a);
+        // JOptionPane.showMessageDialog(null, a);
     }
 
     /**
@@ -219,6 +239,11 @@ public class FormBanHang extends javax.swing.JFrame {
         });
 
         btnThanhToan.setText("Thanh toán");
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -358,7 +383,7 @@ public class FormBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        getData();
+        Tim();
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -366,12 +391,68 @@ public class FormBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        themHang();
+
+        ThemHang();
+        txtGia.setText("");
+        txtHSD.setText("");
+        txtNSX.setText("");
+        txtNgaySX.setText("");
+        txtTenHang.setText("");
+        txtTongtien.setText("");
+        txtTrongLuong.setText("");
+        jSpinner1.setValue(0);
+        jTextField1.setText("");
+        getDataGioHang();
     }//GEN-LAST:event_btnThemActionPerformed
-    public void getData() {
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+       String sql="select thanhtien from chitiethdx where mahdx="+maHd+"";
+       int tien = 0;
+       int tien1 = 0;
+        int b = 0;
+       Vector a=new Vector();
+            Vector c=new Vector();
+            int i=jTable1.getRowCount();
+      
+      
+        try {
+            stm=cnn.prepareStatement(sql);
+            rs=stm.executeQuery();
+            while(rs.next()){
+                a.add(rs.getInt(1));
+             
+                      
+                System.out.println("a" +a);
+               // tien+=tien;
+            }
+           for(int k=0;k<i;k++){
+            System.out.println("for :"+a.elementAt(k));
+            tien=(int) a.elementAt(k);
+           b=tien+b;
+            System.out.println(b);
+           }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String sql2="update hoadonxuat set gia="+b+" where mahdx="+maHd+"";
+        try {
+            stm=cnn.prepareStatement(sql2);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        close();
+        FormBanHang t = new FormBanHang();
+        t.setVisible(true);
+        t.setSize(900, 500);
+        t.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnThanhToanActionPerformed
+    public void Tim() {
         String sql = "select * from hanghoa where mahanghoa=?";
         try {
-            Connection cnn = cn.getConnect();
+            ;
             stm = cnn.prepareStatement(sql);
             stm.setString(1, jTextField1.getText());
             rs = stm.executeQuery();
@@ -390,12 +471,12 @@ public class FormBanHang extends javax.swing.JFrame {
                 } else {
                     cbDonVi.setSelectedIndex(2);
                 }
-                txtTrongLuong.setText(rs.getString(4));
-                txtNgaySX.setText(rs.getString(5));
-                txtNSX.setText(rs.getString(6));
-                txtHSD.setText(rs.getString(7));
-                txtGia.setText(rs.getString(9));
-                jLabel2.setText(rs.getString(8));
+
+                txtNgaySX.setText(rs.getString(4));
+                txtNSX.setText(rs.getString(5));
+                txtHSD.setText(rs.getString(6));
+                txtGia.setText(rs.getString(8));
+                jLabel2.setText(rs.getString(7));
 
             }
             jSpinner1.setEnabled(true);
@@ -405,46 +486,87 @@ public class FormBanHang extends javax.swing.JFrame {
         }
     }
 
-    public void themHang() {
+    public void close() {
+        this.dispose();
+    }
+
+    public void getDataGioHang() {
+        String sql = "Select * from chitietHDX  where mahdx=?";
         Vector head = new Vector();
         Vector head1 = new Vector();
-        head.add("mã hàng");
-        head.add("Tên hàng");
-        head.add("Số lượng");
-        head.add("Thành tiền");
         Vector data = new Vector();
-        data.add(jTextField1.getText());
-        data.add(txtTenHang.getText());
-        data.add(jSpinner1.getValue());
-        int j, i, gia = 0;
-        i = (int) jSpinner1.getValue();
-        j = Integer.parseInt(txtGia.getText());
-        gia = j * i;
-        data.add(gia);
-        head1.add(data);
-        jTable1.setModel(new DefaultTableModel(head1, head));
-       ;
-    }
-    public void getDataGioHang(){
-        String sql="Select * from GioHang where magiohang";
-    
-    }
-    public int getMaGioHang(){
-        int rand=rand(0, 9999999);
-        return rand;
-    }
-    public static int rand(int min,int max){
+        head.add("mã HDX");
+        head.add("Đơn giá");
+        head.add("Số lượng");
+        head.add("Mã Hàng");
+        head.add("Thành tiền");
+
         try {
-            Random rn=new Random();
-            int range=max-min+1;
-            int randomNum=min+rn.nextInt(range);
+            stm = cnn.prepareStatement(sql);
+            stm.setString(1, maHd + "");
+            rs = stm.executeQuery();
+
+//đéo hiểu sao query ra 2 cái giống nhau :3 
+            while (rs.next()) {
+
+                ChiTietHDX cthdx = new ChiTietHDX(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                data.add(cthdx.getMaHDX());
+                data.add(cthdx.getGiatien());
+                data.add(cthdx.getSoluonghang());
+                data.add(cthdx.getMahanghoa());
+                data.add(cthdx.getThanhtien());
+                head1.add(data);
+            }
+
+            jTable1.setModel(new DefaultTableModel(head1, head));
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void ThemHang() {
+        int a = Integer.parseInt(txtGia.getText());
+        int b = (int) jSpinner1.getValue();
+        String sql = "insert into ChitietHDX values(" + maHd + ",?,?,?," + a * b + ")";
+        try {
+            stm = cnn.prepareStatement(sql);
+            stm.setString(1, txtGia.getText());
+            stm.setString(2, jSpinner1.getValue() + "");
+            stm.setString(3, jTextField1.getText());
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void ThemHDX() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        String goidate = dateFormat.format(date);
+        String sql = "insert into hoadonxuat values(" + lblmaHd.getText() + ",'" + goidate + "',1,null)";
+        try {
+            stm = cnn.prepareStatement(sql);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static int rand(int min, int max) {
+        try {
+            Random rn = new Random();
+            int range = max - min + 1;
+            int randomNum = min + rn.nextInt(range);
             return randomNum;
         } catch (Exception e) {
             e.printStackTrace();
-             return -1;
+            return -1;
         }
-        
-       
+
     }
     /**
      * @param args the command line arguments
@@ -484,4 +606,30 @@ public class FormBanHang extends javax.swing.JFrame {
     private javax.swing.JLabel txtTongtien;
     private javax.swing.JTextField txtTrongLuong;
     // End of variables declaration//GEN-END:variables
+}
+
+class OrderDetail {
+
+    private int ID;
+
+    /*
+            Làm như cái này này
+            cái result set thì nhét dữ liệu bằng cái này
+            Orderdetail o = new (rs.getInt(1),....)
+            xong rồi add thằng này vào trong vector
+            thôi nhé =.=
+            hết mẹ 20p rồi =.=
+            =mo)ử)\
+            memowr  
+            mở cái source ra sợ vl :V 
+            m k làm theo MVC à :V 
+            em làm xong mới chia lại đrạit mvc =)
+            địt mẹ điên =)))
+            chia từ đầu đi =)))
+            project bên anh 
+            anh bắt bọn nó làm 1 bảng bên database là 1 class bên java
+            lúc lấy dữ liệu đóng gói dễ hơn
+            thế nhé :v goodluck :V 
+            ok 
+     */
 }

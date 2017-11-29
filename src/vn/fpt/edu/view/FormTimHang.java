@@ -9,13 +9,15 @@ package vn.fpt.edu.view;
  *
  * @author Le Huy
  */
-public class ThemHang extends javax.swing.JFrame {
+public class FormTimHang extends FormKhoHang {
+FormKhoHang m=new FormKhoHang();
 
     /**
      * Creates new form ThemHang
      */
-    public ThemHang() {
+    public FormTimHang() {
         initComponents();
+        
     }
 
     /**
@@ -46,7 +48,6 @@ public class ThemHang extends javax.swing.JFrame {
         txtHanSuDung = new javax.swing.JTextField();
         txtSoLuong = new javax.swing.JTextField();
         cbDonVi = new javax.swing.JComboBox<>();
-        btnThem = new javax.swing.JButton();
         btnQuayLai = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -236,7 +237,7 @@ public class ThemHang extends javax.swing.JFrame {
         getContentPane().add(txtSoLuong, gridBagConstraints);
 
         cbDonVi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gam", "Kg", " " }));
+        cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gam", "Kg", "hộp", "cái" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 4;
@@ -245,18 +246,13 @@ public class ThemHang extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 18, 0, 0);
         getContentPane().add(cbDonVi, gridBagConstraints);
 
-        btnThem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnThem.setText("Thêm");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.gridwidth = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 4, 24, 0);
-        getContentPane().add(btnThem, gridBagConstraints);
-
         btnQuayLai.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnQuayLai.setText("Quay lại");
+        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuayLaiActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 18;
@@ -272,6 +268,10 @@ public class ThemHang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSoLuongActionPerformed
 
+    private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQuayLaiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -279,7 +279,6 @@ public class ThemHang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnQuayLai;
-    private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cbDonVi;
     private javax.swing.JLabel lblDonVi;
     private javax.swing.JLabel lblGia;

@@ -138,7 +138,7 @@ public class FormNhapHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        ThemHang t = new ThemHang();
+        FormTimHang t = new FormTimHang();
         t.setVisible(true);
         t.setSize(350, 500);
         t.setLocationRelativeTo(null);

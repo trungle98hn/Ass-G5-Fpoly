@@ -256,7 +256,7 @@ public class FormThemNhanVien extends javax.swing.JFrame {
           // jDateChooser1.setDateFormatString("yyyy-mm-dd");
            SimpleDateFormat geekonjavadate = new SimpleDateFormat("yyyy/MM/dd");
  String gojdate = geekonjavadate .format(jDateChooser1.getDate());
- JOptionPane.showMessageDialog(null, "Your selected date is "+gojdate);
+ //JOptionPane.showMessageDialog(null, "Your selected date is "+gojdate);
            // String dateinput=new SimpleDateFormat("yyyy-mm-dd").format(date);
             stm.setString(5, gojdate+"");
             if(jRadioButton1.isSelected()){
@@ -276,12 +276,13 @@ public class FormThemNhanVien extends javax.swing.JFrame {
             stm.setString(6, "Quản lý");
             }
             JOptionPane.showMessageDialog(null, "đã lưu");
-            stm.executeQuery();
-            JOptionPane.showMessageDialog(null, "đã lưu");
+            stm.executeUpdate();
+          //  JOptionPane.showMessageDialog(null, "đã lưu");
            
         } catch (SQLException ex) {
             Logger.getLogger(FormThemNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex);
+            System.out.println();
+           
         }
         
     }//GEN-LAST:event_btnAddActionPerformed
@@ -293,7 +294,7 @@ public class FormThemNhanVien extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         close();
-        FormQuanLy m=new FormQuanLy();
+        FormQuanLy m=new FormQuanLy() {};
         m.setVisible(true);
         m.setTitle("Quản lý siêu thị mini");
         m.setSize(1000, 700);

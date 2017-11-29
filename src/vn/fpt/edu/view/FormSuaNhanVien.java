@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package vn.fpt.edu.view;
+
 import vn.fpt.edu.view.FormQuanLy;
 import java.sql.Connection;
 import vn.fpt.edu.connect.Connect;
@@ -14,20 +15,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author lich - kfc
  */
-public class FormSuaNhanVien extends javax.swing.JFrame {
-    Connect cnn=new Connect();
-    Connection cn=cnn.getConnect();
-    PreparedStatement stm=null;
-    ResultSet rs=null;
+public class FormSuaNhanVien extends FormQuanLy{
+
+    Connect cnn = new Connect();
+    Connection cn = cnn.getConnect();
+    PreparedStatement stm = null;
+    ResultSet rs = null;
+
     /**
      * Creates new form FormThemNhanVien
      */
     public FormSuaNhanVien() {
         initComponents();
+       // getdata();
     }
 
     /**
@@ -51,7 +56,7 @@ public class FormSuaNhanVien extends javax.swing.JFrame {
         lblChucVu = new javax.swing.JLabel();
         txtTaiKhoan = new javax.swing.JTextField();
         cbbChucVU = new javax.swing.JComboBox<>();
-        btnAdd = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         txtMatKhau = new javax.swing.JTextField();
         txtMaNhanVien = new javax.swing.JTextField();
@@ -104,11 +109,11 @@ public class FormSuaNhanVien extends javax.swing.JFrame {
             }
         });
 
-        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSave.setText("lưu");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -147,7 +152,7 @@ public class FormSuaNhanVien extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
-                        .addComponent(btnAdd))
+                        .addComponent(btnSave))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(73, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +224,7 @@ public class FormSuaNhanVien extends javax.swing.JFrame {
                     .addComponent(lblChucVu))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
+                    .addComponent(btnSave)
                     .addComponent(btnBack))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -242,49 +247,45 @@ public class FormSuaNhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        String sql="insert into users values(?,?,?,?,?,?,?,?,?)";
+        String sql = "update users set mauser=?,ten=?,sdt=?,email=?,ngaysinh=?,chucvu=?,matkhau=?,taikhoan=?,gioitinh=? where mauser=?";
         try {
-            PreparedStatement stm=cn.prepareStatement(sql);
-            
+            PreparedStatement stm = cn.prepareStatement(sql);
+
             stm.setString(1, txtMaNhanVien.getText());
             stm.setString(2, txtTenNhanVien.getText());
             stm.setString(3, txtSDT.getText());
             stm.setString(4, txtDiaChi.getText());
-        // java.util.Date date=   jDateChooser1.getDate();
-          // jDateChooser1.setDateFormatString("yyyy-mm-dd");
-           SimpleDateFormat geekonjavadate = new SimpleDateFormat("yyyy/MM/dd");
- String gojdate = geekonjavadate .format(jDateChooser1.getDate());
- JOptionPane.showMessageDialog(null, "Your selected date is "+gojdate);
-           // String dateinput=new SimpleDateFormat("yyyy-mm-dd").format(date);
-            stm.setString(5, gojdate+"");
-            if(jRadioButton1.isSelected()){
-            stm.setString(9, "nam");
-            }
-            else
-            {
-            stm.setString(9, "nu");
+            // java.util.Date date=   jDateChooser1.getDate();
+            // jDateChooser1.setDateFormatString("yyyy-mm-dd");
+            SimpleDateFormat geekonjavadate = new SimpleDateFormat("yyyy/MM/dd");
+            String gojdate = geekonjavadate.format(jDateChooser1.getDate());
+            JOptionPane.showMessageDialog(null, "Your selected date is " + gojdate);
+            // String dateinput=new SimpleDateFormat("yyyy-mm-dd").format(date);
+            stm.setString(5, gojdate + "");
+            if (jRadioButton1.isSelected()) {
+                stm.setString(9, "nam");
+            } else {
+                stm.setString(9, "nu");
             }
             stm.setString(7, txtMatKhau.getText());
             stm.setString(8, txtTaiKhoan.getText());
-            if(cbbChucVU.getSelectedIndex()==0){
-            stm.setString(6, "Nhân viên");
-            }
-            else
-            {
-            stm.setString(6, "Quản lý");
+            if (cbbChucVU.getSelectedIndex() == 0) {
+                stm.setString(6, "Nhân viên");
+            } else {
+                stm.setString(6, "Quản lý");
             }
             JOptionPane.showMessageDialog(null, "đã lưu");
             stm.executeQuery();
             JOptionPane.showMessageDialog(null, "đã lưu");
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(FormSuaNhanVien.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-        
-    }//GEN-LAST:event_btnAddActionPerformed
+
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void cbbChucVUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbChucVUActionPerformed
         // TODO add your handling code here:
@@ -293,7 +294,8 @@ public class FormSuaNhanVien extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         close();
-        FormQuanLy m=new FormQuanLy();
+        FormQuanLy m = new FormQuanLy() {
+        };
         m.setVisible(true);
         m.setTitle("Quản lý siêu thị mini");
         m.setSize(1000, 700);
@@ -301,18 +303,32 @@ public class FormSuaNhanVien extends javax.swing.JFrame {
         m.setLocationRelativeTo(null);
         m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_btnBackActionPerformed
-public void close(){
-this.dispose();
+    public void close() {
+        this.dispose();
 
-}
+    }
+
+    public void getdata() {
+        FormQuanLy m = new FormQuanLy() {
+            public void setMaUser(String maUser) {
+                this.maUser = maUser;
+            }
+           
+
+        };
+
+        String mauUser = m.getMaUserTb();
+        System.out.println(mauUser);
+        
+    }
     /**
      * @param args the command line arguments
      */
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbbChucVU;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JPanel jPanel1;

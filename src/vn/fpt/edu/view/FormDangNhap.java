@@ -31,7 +31,7 @@ public class FormDangNhap extends javax.swing.JFrame {
     }
 
     public void check() {
-        String sql="select * from users where taikhoan=? and matkhau=?";
+        String sql="select taikhoan,matkhau from users where taikhoan=? and matkhau=?";
         try {
             stm=cn.prepareStatement(sql);
             stm.setString(1, txtTaiKhoan.getText());
@@ -43,7 +43,7 @@ public class FormDangNhap extends javax.swing.JFrame {
             if(rs.getString(1).equals(txtTaiKhoan.getText())&&rs.getString(2
             ).equals(txtMatKhau.getText())){
                 JOptionPane.showMessageDialog(null, "Login sucess");
-                FormQuanLy t=new FormQuanLy();
+                FormQuanLy t=new FormQuanLy() {};
                 t.setVisible(true);
         t.setSize(900, 500);
         t.setLocationRelativeTo(null);}

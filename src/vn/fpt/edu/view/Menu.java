@@ -138,7 +138,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuanLyActionPerformed
-        FormQuanLy t = new FormQuanLy();
+        FormQuanLy t = new FormQuanLy() {};
        
         t.setVisible(true);
         t.setSize(900, 500);
@@ -163,7 +163,7 @@ public class Menu extends javax.swing.JFrame {
     private void banhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_banhangActionPerformed
         FormBanHang t = new FormBanHang();
         t.setVisible(true);
-        t.setSize(900, 500);
+        t.setSize(1000, 800);
         t.setLocationRelativeTo(null);
     }//GEN-LAST:event_banhangActionPerformed
 

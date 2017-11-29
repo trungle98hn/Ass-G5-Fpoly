@@ -7,9 +7,14 @@ package vn.fpt.edu.view;
 
 import java.awt.Dimension;
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -21,32 +26,40 @@ import vn.fpt.edu.connect.Connect;
  */
 public class FormKhoHang extends javax.swing.JFrame {
 
+    JTable table = new JTable();
+    Connect kn = new Connect();
+    Connection cn = kn.getConnect();
+    PreparedStatement stm = null;
+    Statement st = null;
+    ResultSet rs = null;
+    DefaultTableModel dftb = new DefaultTableModel();
+    int maHd;
+
     /**
      * Creates new form FormKhoHang
      */
     public FormKhoHang() {
         initComponents();
-        
-        JTable table = new JTable();
-        DefaultTableModel dftb = new DefaultTableModel();
+        getdata();
+       
+    }
+
+    public void getdata() {
+
         Vector data = new Vector();
         Vector header = new Vector();
         header.add("STT");
         header.add("Mã HH");
         header.add("Tên HH");
         header.add("Đơn vị");
-        header.add("Trọng Lượng");
         header.add("Nhà sản xuất");
         header.add("Ngày sản xuất");
         header.add("Hạn sử dụng");
-        header.add("Giá tiền");
         header.add("Số lượng");
-
-        Connect kn = new Connect();
-        Connection cn = kn.getConnect();
+        header.add("Giá tiền");
+        
         table.setPreferredScrollableViewportSize(new Dimension(1000, 230));
-        Statement st = null;
-        ResultSet rs = null;
+
         String sql = "Select * FROM HANGHOA";
         try {
             st = cn.createStatement();
@@ -64,7 +77,7 @@ public class FormKhoHang extends javax.swing.JFrame {
                 data1.add(rs.getString(6));
                 data1.add(rs.getString(7));
                 data1.add(rs.getString(8));
-                data1.add(rs.getString(9));
+               
                 data.add(data1);
                 table.setModel(new DefaultTableModel(data, header));
                 i++;
@@ -74,9 +87,10 @@ public class FormKhoHang extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         table.setModel(new DefaultTableModel(data, header));
-        
+
         jScrollPane1.setViewportView(table);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,6 +140,11 @@ public class FormKhoHang extends javax.swing.JFrame {
 
         btnTim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnTim.setText("Tìm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
 
         txtTim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTim.addActionListener(new java.awt.event.ActionListener() {
@@ -215,32 +234,166 @@ public class FormKhoHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        int row = table.getSelectedRow();
+        String mahang = (String) table.getValueAt(row, 1);
+        String sql = "update hanghoa set tenhanghoa=?,donvi=?,trongluong=?,nsx=?,nhasanxuat=?,hansudung=?,soluong=?,gia=? where mahanghoa=?";
+        try {
+
+            stm = cn.prepareStatement(sql);
+            rs = stm.executeQuery();
+            Vector data = new Vector();
+            Vector header = new Vector();
+            header.add("STT");
+            header.add("Mã HH");
+            header.add("Tên HH");
+            header.add("Đơn vị");
+            header.add("Trọng Lượng");
+            header.add("Nhà sản xuất");
+            header.add("Ngày sản xuất");
+            header.add("Hạn sử dụng");
+            header.add("Giá tiền");
+            header.add("Số lượng");
+            while (rs.next()) {
+                int i = 1;
+                Vector data1 = new Vector();
+
+                data1.add(i);
+                data1.add(rs.getString(1));
+                data1.add(rs.getString(2));
+                data1.add(rs.getString(3));
+                data1.add(rs.getString(4));
+                data1.add(rs.getString(5));
+                data1.add(rs.getString(6));
+                data1.add(rs.getString(7));
+                data1.add(rs.getString(8));
+                data1.add(rs.getString(9));
+                data.add(data1);
+                table.setModel(new DefaultTableModel(data, header));
+
+            }
+            stm.setString(1, sql);
+
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        FormNhapHang t = new FormNhapHang();
+        FormThemHang t = new FormThemHang();
         t.setVisible(true);
-        t.setSize(900, 500);
+        t.setSize(400, 400);
         t.setLocationRelativeTo(null);
+        close();
     }//GEN-LAST:event_btnThemActionPerformed
-
+    public void close() {
+        this.dispose();
+    }
     private void pnlBottomAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_pnlBottomAncestorAdded
 
     }//GEN-LAST:event_pnlBottomAncestorAdded
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+        int row = table.getSelectedRow();
+        String mahang = (String) table.getValueAt(row, 1);
+        String sql = "delete from hanghoa where mahanghoa=?";
+        try {
+            stm = cn.prepareStatement(sql);
+            stm.setString(1, mahang);
+            stm.executeUpdate();
+            getdata();
+            JOptionPane.showMessageDialog(null, "đã xóa");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "lỗi" + e);
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        FormTimHang m = new FormTimHang();
+        m.setVisible(true);
+        m.setLocationRelativeTo(null);
+        m.setSize(350, 370);
+
+
+    }//GEN-LAST:event_btnTimActionPerformed
+    public void Tim() {
+        String sql = "select * form hanghoa where mahanghoa=?";
+        try {
+            stm = cn.prepareStatement(sql);
+            stm.setString(1, txtTim.getText());
+
+            Vector data = new Vector();
+            Vector header = new Vector();
+            header.add("STT");
+            header.add("Mã HH");
+            header.add("Tên HH");
+            header.add("Đơn vị");
+            header.add("Trọng Lượng");
+            header.add("Nhà sản xuất");
+            header.add("Ngày sản xuất");
+            header.add("Hạn sử dụng");
+            header.add("Giá tiền");
+            header.add("Số lượng");
+            while (rs.next()) {
+                Vector data1 = new Vector();
+
+                data1.add("1");
+                data1.add(rs.getString(1));
+                data1.add(rs.getString(2));
+                data1.add(rs.getString(3));
+                data1.add(rs.getString(4));
+                data1.add(rs.getString(5));
+                data1.add(rs.getString(6));
+                data1.add(rs.getString(7));
+                data1.add(rs.getString(8));
+                data1.add(rs.getString(9));
+                data.add(data1);
+                table.setModel(new DefaultTableModel(data, header));
+                JOptionPane.showMessageDialog(null, data);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormKhoHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void a() {
+        JOptionPane.showMessageDialog(null, "a");
+    }
+
+    public void Timhang() {
+        String tim = txtTim.getText();
+        int counter = dftb.getRowCount();
+        Vector data1 = new Vector();
+        for (int i = 1; i <= counter; i++) {
+            if (tim.equals(table.getValueAt(i, 1))) {
+                Vector data = new Vector();
+                data.add(table.getValueAt(i, 1));
+                data.add(table.getValueAt(i, 1));
+                data.add(table.getValueAt(i, 2));
+                data.add(table.getValueAt(i, 3));
+                data.add(table.getValueAt(i, 4));
+                data.add(table.getValueAt(i, 5));
+                data.add(table.getValueAt(i, 6));
+                data.add(table.getValueAt(i, 7));
+                data.add(table.getValueAt(i, 8));
+                data.add(table.getValueAt(i, 9));
+                data1.add(data);
+                JOptionPane.showMessageDialog(null, data, tim, HEIGHT);
+            }
+
+        }
+    }
+
+    public String mahang() {
+        return txtTim.getText();
+    }
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;

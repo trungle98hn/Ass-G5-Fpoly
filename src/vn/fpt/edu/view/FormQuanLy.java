@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package vn.fpt.edu.view;
+
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -13,17 +14,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import vn.fpt.edu.connect.Connect;
+
 /**
  *
  * @author Le Huy
  */
 public class FormQuanLy extends javax.swing.JFrame {
-    Connect cnn=new Connect();
-    Connection cn=cnn.getConnect();
-    PreparedStatement stm=null;
-    ResultSet rs=null;
-    Vector tittle=new Vector();
-    
+
+    String maUser = null;
+    Connect cnn = new Connect();
+    Connection cn = cnn.getConnect();
+    PreparedStatement stm = null;
+    ResultSet rs = null;
+    Vector tittle = new Vector();
+
     /**
      * Creates new form FormQuanLy
      */
@@ -36,25 +40,35 @@ public class FormQuanLy extends javax.swing.JFrame {
         tittle.add("chuc vu");
         initComponents();
         getData();
-        
+
     }
-    public void getData(){
-        String sql="select * from users";
+
+    public String getMaUserTb() {
+
+        int a = tableList.getSelectedRow();
+        maUser = tableList.getValueAt(a, 1) + "";
+        //System.out.println(maUser);
+       
+        return maUser;
+    }
+
+    public void getData() {
+        String sql = "select * from users";
         try {
-         stm=cn.prepareStatement(sql);
-         rs=stm.executeQuery();
-            Vector data=new Vector();
-            while(rs.next()){
-                Vector user=new Vector();
+            stm = cn.prepareStatement(sql);
+            rs = stm.executeQuery();
+            Vector data = new Vector();
+            while (rs.next()) {
+                Vector user = new Vector();
                 user.addElement(rs.getString(1));
                 user.addElement(rs.getString(2));
                 user.addElement(rs.getString(3));
                 user.addElement(rs.getString(4));
                 user.addElement(rs.getString(5));
                 user.addElement(rs.getString(6));
-            data.add(user);
+                data.add(user);
             }
-           tableList.setModel(new DefaultTableModel(data, tittle));
+            tableList.setModel(new DefaultTableModel(data, tittle));
         } catch (SQLException ex) {
             Logger.getLogger(FormQuanLy.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,11 +93,6 @@ public class FormQuanLy extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableList = new javax.swing.JTable();
         lblDanhSachNhanVien = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý");
@@ -124,7 +133,7 @@ public class FormQuanLy extends javax.swing.JFrame {
                 .addComponent(btnSua)
                 .addGap(48, 48, 48)
                 .addComponent(btnXoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTimKiem)
@@ -164,54 +173,23 @@ public class FormQuanLy extends javax.swing.JFrame {
         lblDanhSachNhanVien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblDanhSachNhanVien.setText("Danh Sách Nhân Viên");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField1");
-
-        jTextField3.setText("jTextField1");
-
-        jTextField4.setText("jTextField1");
-
-        jTextField5.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(lblDanhSachNhanVien)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(0, 868, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addComponent(lblDanhSachNhanVien)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,9 +203,9 @@ public class FormQuanLy extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,36 +221,36 @@ public class FormQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        String sql="delete from users where mauser=?";
-      int row=  tableList.getSelectedRow();
-      
+        String sql = "delete from users where mauser=?";
+        int row = tableList.getSelectedRow();
+
         try {
-            stm=cn.prepareStatement(sql);
-            
-            stm.setString(1, (String) tableList.getValueAt(row, 1));
+            stm = cn.prepareStatement(sql);
+
+            stm.setString(1, (String) tableList.getValueAt(row, 2));
             stm.executeUpdate();
             stm.close();
             getData();
             JOptionPane.showMessageDialog(null, "ok");
         } catch (Exception e) {
-         JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-         FormSuaNhanVien t = new FormSuaNhanVien();
+        FormSuaNhanVien t = new FormSuaNhanVien();
         t.setVisible(true);
         t.setSize(380, 500);
         t.setLocationRelativeTo(null);
-        getData();
+        getMaUserTb();
+        System.out.println(getMaUserTb());
         this.dispose();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
@@ -282,11 +260,6 @@ public class FormQuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lblDanhSachNhanVien;
     private javax.swing.JTable tableList;
     private javax.swing.JTextField txtTimKiem;

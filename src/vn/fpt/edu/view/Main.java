@@ -7,6 +7,7 @@ package vn.fpt.edu.view;
 
 import javax.swing.JFrame;
 import javax.swing.*;
+import vn.fpt.edu.process.dangnhap;
 
 /**
  *
@@ -15,7 +16,7 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
           
-        FormQuanLy m = new FormQuanLy();
+        Menu m = new Menu(){};
       
         m.setTitle("Quản lý siêu thị mini");
         m.setSize(1000, 700);
