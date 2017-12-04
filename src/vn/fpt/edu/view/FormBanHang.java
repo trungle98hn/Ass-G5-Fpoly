@@ -5,6 +5,7 @@
  */
 package vn.fpt.edu.view;
 
+import java.io.IOException;
 import vn.fpt.edu.connect.Connect;
 import vn.fpt.edu.view.*;
 import vn.fpt.edu.beans.ChiTietHDX;
@@ -22,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.util.Date;
+import jxl.write.WriteException;
+import vn.fpt.edu.beans.users;
 import vn.fpt.edu.process.*;
 
 /**
@@ -35,7 +38,7 @@ public class FormBanHang extends javax.swing.JFrame {
     ResultSet rs = null;
     Connect cn = new Connect();
     Connection cnn = cn.getConnect();
-
+    int maHd;
     String mdh;
 
     /**
@@ -43,13 +46,16 @@ public class FormBanHang extends javax.swing.JFrame {
      */
     public FormBanHang() {
         initComponents();
-        int i = jTable1.getSelectedRow();
+
         jLabel2.setVisible(false);
         HoaDonXuat tm = new HoaDonXuat();
-        tm.getMhd();
-        tm.headerTable();
-        tm.getData();
-        tm.TongTien(i);
+        maHd = tm.getMhd();
+        tm.HoaDonXuat();
+        users u = new users();
+        System.out.println(maHd);
+        txtTenNhanVien.setText(u.getMauser() + "");
+       // getDataGioHang();
+
         //  String a=(String) jSpinner1.getValue();
         //  int giatien=Integer.parseInt(txtGia.getText())*Integer.parseInt(a);
         // JOptionPane.showMessageDialog(null, a);
@@ -96,6 +102,8 @@ public class FormBanHang extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         lblGia1 = new javax.swing.JLabel();
         lblgia = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtTenNhanVien = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -162,7 +170,7 @@ public class FormBanHang extends javax.swing.JFrame {
                         .addComponent(txtTenHang, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNgaySanXuat)
                     .addComponent(lblTrongLuong)
@@ -178,7 +186,7 @@ public class FormBanHang extends javax.swing.JFrame {
                     .addGroup(pnltopLayout.createSequentialGroup()
                         .addComponent(lblGia)
                         .addGap(69, 69, 69)
-                        .addComponent(txtGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtGia, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(pnltopLayout.createSequentialGroup()
                         .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,6 +337,10 @@ public class FormBanHang extends javax.swing.JFrame {
 
         lblgia.setText("0");
 
+        jLabel1.setText("Nhân Viên:");
+
+        txtTenNhanVien.setText("jLabel3");
+
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
@@ -337,14 +349,19 @@ public class FormBanHang extends javax.swing.JFrame {
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMainLayout.createSequentialGroup()
                         .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlMainLayout.createSequentialGroup()
-                                .addGap(0, 654, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1))
+                            .addGroup(pnlMainLayout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblGia1)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblgia, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1)))
+                                .addComponent(lblgia, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(pnltop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -362,7 +379,9 @@ public class FormBanHang extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblGia1)
-                            .addComponent(lblgia))
+                            .addComponent(lblgia)
+                            .addComponent(jLabel1)
+                            .addComponent(txtTenNhanVien))
                         .addContainerGap(23, Short.MAX_VALUE))))
         );
 
@@ -382,6 +401,8 @@ public class FormBanHang extends javax.swing.JFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
+        
+        xoa();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
@@ -400,19 +421,23 @@ public class FormBanHang extends javax.swing.JFrame {
         txtNSX.setText("");
         txtNgaySX.setText("");
         txtTenHang.setText("");
-        int i = jTable1.getRowCount();
+
         txtTrongLuong.setText("");
         jSpinner1.setValue(0);
         jTextField1.setText("");
-        HoaDonXuat hdx = new HoaDonXuat();
-
-        jTable1.setModel(new DefaultTableModel(hdx.headerTable(), hdx.getData()));
-        hdx.TongTien(i);
+        getDataGioHang();
+        thanhtien();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        //thanhtoan();
-
+        thanhtoan();
+        try {
+            XuatHDX hdx=new XuatHDX(maHd);
+        } catch (IOException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (WriteException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnThanhToanActionPerformed
     public void Tim() {
         String sql = "select * from hanghoa where mahanghoa=?";
@@ -454,126 +479,131 @@ public class FormBanHang extends javax.swing.JFrame {
     public void close() {
         this.dispose();
     }
-//public void thanhtoan(){
-// String sql="select thanhtien from chitiethdx where mahdx="+maHd+"";
-//       int tien = 0;
-//       
-//        int b = 0;
-//       Vector a=new Vector();
-//            Vector c=new Vector();
-//            int i=jTable1.getRowCount();
-//      
-//      
-//        try {
-//            stm=cnn.prepareStatement(sql);
-//            rs=stm.executeQuery();
-//            while(rs.next()){
-//                a.add(rs.getInt(1));
-//             
-//                      
-//                System.out.println("a" +a);
-//               // tien+=tien;
-//            }
-//           for(int k=0;k<i;k++){
-//            System.out.println("for :"+a.elementAt(k));
-//            tien=(int) a.elementAt(k);
-//           b=tien+b;
-//            System.out.println(b);
-//           }
-//           lblgia.setText(b+"");
-//           
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        String sql2="update hoadonxuat set gia="+b+" where mahdx="+maHd+"";
-//        try {
-//            stm=cnn.prepareStatement(sql2);
-//            
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        close();
-//        FormBanHang t = new FormBanHang();
-//        t.setVisible(true);
-//        t.setSize(900, 500);
-//        t.setLocationRelativeTo(null);
-//
-//}
-//    public void getDataGioHang() {
-//        String sql = "Select * from chitietHDX  where mahdx=?";
-//        Vector head = new Vector();
-//        Vector head1 = new Vector();
-//        Vector data = new Vector();
-//        head.add("mã HDX");
-//        head.add("Đơn giá");
-//        head.add("Số lượng");
-//        head.add("Mã Hàng");
-//        head.add("Thành tiền");
-//
-//        try {
-//            stm = cnn.prepareStatement(sql);
-//            stm.setString(1, maHd + "");
-//            rs = stm.executeQuery();
-//
-////đéo hiểu sao query ra 2 cái giống nhau :3 
-//            while (rs.next()) {
-//
-//                ChiTietHDX cthdx = new ChiTietHDX(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
-//                data.add(cthdx.getMaHDX());
-//                data.add(cthdx.getGiatien());
-//                data.add(cthdx.getSoluonghang());
-//                data.add(cthdx.getMahanghoa());
-//                data.add(cthdx.getThanhtien());
-//                head1.add(data);
-//            }
-//
-//            jTable1.setModel(new DefaultTableModel(head1, head));
-//        } catch (SQLException ex) {
-//            System.out.println(ex);
-//            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        String sql1="select thanhtien from chitiethdx where mahdx="+maHd+"";
-//       int tien = 0;
-//       
-//        int b = 0;
-//       Vector a=new Vector();
-//            Vector c=new Vector();
-//            int i=jTable1.getRowCount();
-//      
-//      
-//        try {
-//            stm=cnn.prepareStatement(sql1);
-//            rs=stm.executeQuery();
-//            while(rs.next()){
-//                a.add(rs.getInt(1));
-//             
-//                      
-//                System.out.println("a" +a);
-//               // tien+=tien;
-//            }
-//           for(int k=0;k<i;k++){
-//            System.out.println("for :"+a.elementAt(k));
-//            tien=(int) a.elementAt(k);
-//           b=tien+b;
-//            System.out.println(b);
-//           }
-//           lblgia.setText(b+"");
-//           
-//        } catch (SQLException ex) {
-//            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
+
+    public void thanhtoan() {
+        String sql = "select thanhthien from chitiethdx where mahdx=" + maHd + "";
+        int tien = 0;
+
+        int b = 0;
+        Vector a = new Vector();
+        Vector c = new Vector();
+        int i = jTable1.getRowCount();
+
+        try {
+            stm = cnn.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                a.add(rs.getInt(1));
+
+                System.out.println("a" + a);
+                // tien+=tien;
+            }
+            for (int k = 0; k < i; k++) {
+                System.out.println("for :" + a.elementAt(k));
+                tien = (int) a.elementAt(k);
+                b = tien + b;
+                System.out.println(b);
+            }
+            lblgia.setText(b + "");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String sql2 = "update hoadonxuat set gia=" + b + " where mahdx=" + maHd + "";
+        try {
+            stm = cnn.prepareStatement(sql2);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        close();
+        FormBanHang t = new FormBanHang();
+        t.setVisible(true);
+        t.setSize(900, 500);
+        t.setLocationRelativeTo(null);
+
+    }
+
+    public void getDataGioHang() {
+        String sql = "Select * from chitietHDX  where mahdx=?";
+        Vector head = new Vector();
+        Vector head1 = new Vector();
+        Vector data = new Vector();
+        head.add("mã HDX");
+        head.add("Đơn giá");
+        head.add("Số lượng");
+        head.add("Mã Hàng");
+        head.add("Thành tiền");
+
+        try {
+            stm = cnn.prepareStatement(sql);
+            stm.setString(1, maHd + "");
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+
+                ChiTietHDX cthdx = new ChiTietHDX(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                data.add(cthdx.getMaHDX());
+                data.add(cthdx.getGiatien());
+                data.add(cthdx.getSoluonghang());
+                data.add(cthdx.getMahanghoa());
+                data.add(cthdx.getThanhtien());
+                head1.add(data);
+            }
+
+            jTable1.setModel(new DefaultTableModel(head1, head));
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void thanhtien(){
+        String sql1 = "select thanhthien from chitiethdx where mahdx=" + maHd + "";
+        int tien = 0;
+
+        int b = 0;
+        Vector a = new Vector();
+        Vector c = new Vector();
+        int i = jTable1.getRowCount();
+
+        try {
+            stm = cnn.prepareStatement(sql1);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                a.add(rs.getInt(1));
+
+                System.out.println("a" + a);
+                // tien+=tien;
+            }
+            for (int k = 0; k < i; k++) {
+                System.out.println("for :" + a.elementAt(k));
+                tien = (int) a.elementAt(k);
+                b = tien + b;
+                System.out.println(b);
+            }
+            lblgia.setText(b + "");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     public void ThemHang() {
 
         int a = Integer.parseInt(txtGia.getText());
         int b = (int) jSpinner1.getValue();
-        HoaDonXuat hdx = new HoaDonXuat();
+        ThemHangVaoGio m = new ThemHangVaoGio(maHd, txtGia.getText(), jSpinner1.getValue() + "", jTextField1.getText(), a * b + "");
 
-        ThemHangVaoGio m = new ThemHangVaoGio(hdx.getMhd(), txtGia.getText(), jSpinner1.getValue() + "", jTextField1.getText(), a * b + "");
+    }
+
+    public void xoa() {
+        int row=jTable1.getSelectedRow();
+        int a=(int) jTable1.getValueAt(row, 1);
+       // if(JOptionPane.showConfirmDialog(null, maHd, mdh, WIDTH, HEIGHT))
+       XoaHangTrongGio xh=new XoaHangTrongGio(a,maHd);
+       getDataGioHang();
 
     }
 
@@ -587,6 +617,7 @@ public class FormBanHang extends javax.swing.JFrame {
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbDonVi;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel4;
@@ -613,6 +644,7 @@ public class FormBanHang extends javax.swing.JFrame {
     private javax.swing.JLabel txtNSX;
     private javax.swing.JLabel txtNgaySX;
     private javax.swing.JLabel txtTenHang;
+    private javax.swing.JLabel txtTenNhanVien;
     private javax.swing.JTextField txtTrongLuong;
     // End of variables declaration//GEN-END:variables
 }
