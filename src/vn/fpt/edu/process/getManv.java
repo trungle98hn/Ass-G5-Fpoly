@@ -9,6 +9,8 @@ package vn.fpt.edu.process;
  *
  * @author Admin
  */
-public class dangnhap {
-    
+public class getManv {
+    public String getmanv(String manv){
+    return manv;
+    }
 }

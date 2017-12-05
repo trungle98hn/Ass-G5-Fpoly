@@ -5,11 +5,13 @@
  */
 package vn.fpt.edu.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Admin
  */
-public class ChiTietHDN {
+public class ChiTietHDN implements Serializable{
    private int mahanghoa,mahdn,suongluonghang,giatien,thanhtien;
 
     public ChiTietHDN(int mahanghoa, int mahdn, int suongluonghang, int giatien, int thanhtien) {

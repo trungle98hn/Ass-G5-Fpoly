@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import org.omg.CORBA.TCKind;
 import vn.fpt.edu.process.Check;
 
 /**
@@ -24,13 +25,13 @@ public class FormDangNhap extends javax.swing.JFrame {
     Connect cnn = new Connect();     Vector id = null,pass=null;
     Connection cn = cnn.getConnect();
     PreparedStatement stm = null;
-
+String taikhoan;
     /**
      * Creates new form FormDangNhap
      */
     public FormDangNhap() {
         initComponents();
-        
+        taikhoan=txtTaiKhoan.getText();
     }
 
    
@@ -128,7 +129,8 @@ public class FormDangNhap extends javax.swing.JFrame {
 Check c=new Check();
         String pass=new String(txtmatkhau.getPassword());
 c.check(txtTaiKhoan.getText(), pass);
-        System.out.println(getTaikhoan());
+Menu m=new Menu();
+        m.tk(txtTaiKhoan.getText());
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void txtmatkhauKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmatkhauKeyReleased
@@ -140,8 +142,8 @@ c.check(txtTaiKhoan.getText(), pass);
         }
     }//GEN-LAST:event_txtmatkhauKeyReleased
    public String getTaikhoan(){
-       String taikhoan;
        taikhoan=txtTaiKhoan.getText();
+       
        return taikhoan;
    }
     /**

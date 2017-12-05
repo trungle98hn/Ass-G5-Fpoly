@@ -31,25 +31,30 @@
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="btnDangxuat" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblID" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblHoten" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDiaChi" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNamsinh" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblGmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSDT" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblChucvu" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="lblID1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="txtTaiKhoan" pref="141" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtID" pref="141" max="32767" attributes="0"/>
-                          <Component id="txtHoten" max="32767" attributes="0"/>
-                          <Component id="txtDiaChi" max="32767" attributes="0"/>
-                          <Component id="txtNamsinh" max="32767" attributes="0"/>
-                          <Component id="txtGmail" max="32767" attributes="0"/>
-                          <Component id="txtSDT" max="32767" attributes="0"/>
-                          <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblID" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblHoten" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNamsinh" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblGmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblSDT" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblChucvu" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtID" pref="141" max="32767" attributes="0"/>
+                              <Component id="txtHoten" max="32767" attributes="0"/>
+                              <Component id="txtNamsinh" max="32767" attributes="0"/>
+                              <Component id="txtGmail" max="32767" attributes="0"/>
+                              <Component id="txtSDT" max="32767" attributes="0"/>
+                              <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -60,22 +65,22 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="txtID" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblID" alignment="2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblID1" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTaiKhoan" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="lblHoten" alignment="2" min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="txtHoten" alignment="2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtID" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="lblDiaChi" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtDiaChi" alignment="2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblHoten" min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="txtHoten" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="lblNamsinh" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="txtNamsinh" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -122,14 +127,6 @@
         <Property name="text" type="java.lang.String" value="H&#x1ecd; T&#xea;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDiaChi">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a Ch&#x1ec9;:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblNamsinh">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -170,13 +167,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtHoten">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtDiaChi">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -241,6 +231,21 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblID1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="T&#xe0;i Kho&#x1ea3;n:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtTaiKhoan">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

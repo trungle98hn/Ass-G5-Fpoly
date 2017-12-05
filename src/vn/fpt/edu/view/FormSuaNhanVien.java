@@ -67,7 +67,6 @@ public class FormSuaNhanVien extends FormQuanLy{
         jRadioButton2 = new javax.swing.JRadioButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thêm nhân viên");
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));

@@ -29,20 +29,20 @@ public class FormTaiKhoan extends javax.swing.JFrame {
 
         lblID = new javax.swing.JLabel();
         lblHoten = new javax.swing.JLabel();
-        lblDiaChi = new javax.swing.JLabel();
         lblNamsinh = new javax.swing.JLabel();
         lblGmail = new javax.swing.JLabel();
         lblSDT = new javax.swing.JLabel();
         lblChucvu = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         txtHoten = new javax.swing.JTextField();
-        txtDiaChi = new javax.swing.JTextField();
         txtNamsinh = new javax.swing.JTextField();
         txtGmail = new javax.swing.JTextField();
         txtSDT = new javax.swing.JTextField();
         btnDoimatkhau = new javax.swing.JButton();
         btnDangxuat = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        lblID1 = new javax.swing.JLabel();
+        txtTaiKhoan = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,9 +51,6 @@ public class FormTaiKhoan extends javax.swing.JFrame {
 
         lblHoten.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblHoten.setText("Họ Tên:");
-
-        lblDiaChi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblDiaChi.setText("Địa Chỉ:");
 
         lblNamsinh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblNamsinh.setText("Năm Sinh:");
@@ -70,8 +67,6 @@ public class FormTaiKhoan extends javax.swing.JFrame {
         txtID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtHoten.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtNamsinh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNamsinh.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +97,11 @@ public class FormTaiKhoan extends javax.swing.JFrame {
             }
         });
 
+        lblID1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblID1.setText("Tài Khoản:");
+
+        txtTaiKhoan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,42 +113,45 @@ public class FormTaiKhoan extends javax.swing.JFrame {
                         .addComponent(btnDoimatkhau)
                         .addGap(45, 45, 45)
                         .addComponent(btnDangxuat))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblID)
-                            .addComponent(lblHoten)
-                            .addComponent(lblDiaChi)
-                            .addComponent(lblNamsinh)
-                            .addComponent(lblGmail)
-                            .addComponent(lblSDT)
-                            .addComponent(lblChucvu))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                            .addComponent(txtHoten)
-                            .addComponent(txtDiaChi)
-                            .addComponent(txtNamsinh)
-                            .addComponent(txtGmail)
-                            .addComponent(txtSDT)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblID1)
+                            .addGap(39, 39, 39)
+                            .addComponent(txtTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblID)
+                                .addComponent(lblHoten)
+                                .addComponent(lblNamsinh)
+                                .addComponent(lblGmail)
+                                .addComponent(lblSDT)
+                                .addComponent(lblChucvu))
+                            .addGap(43, 43, 43)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                .addComponent(txtHoten)
+                                .addComponent(txtNamsinh)
+                                .addComponent(txtGmail)
+                                .addComponent(txtSDT)
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(312, 312, 312))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblID1)
+                    .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblID)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHoten, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHoten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lblDiaChi)
-                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblNamsinh)
                     .addComponent(txtNamsinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -184,11 +187,26 @@ public class FormTaiKhoan extends javax.swing.JFrame {
         t.setSize(400, 300);
         t.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnDoimatkhauActionPerformed
-
+    public void getTt(String taikhoan, String id, String ten, String namsinh, String email, String sdt, String chucvu) {
+        txtTaiKhoan.setText(taikhoan);
+        txtID.setText(id);
+        System.out.println(id+"tab Ftk");
+        txtGmail.setText(email);
+        txtHoten.setText(ten);
+        txtNamsinh.setText(namsinh);
+        txtSDT.setText(sdt);
+         if (chucvu.equalsIgnoreCase("Quản lý")) {
+            jComboBox1.setSelectedIndex(1);
+        } else {
+            jComboBox1.setSelectedIndex(0);
+        }
+    }
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+    public void thongtin() {
 
+    }
     /**
      * @param args the command line arguments
      */
@@ -198,17 +216,17 @@ public class FormTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JButton btnDoimatkhau;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lblChucvu;
-    private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblGmail;
     private javax.swing.JLabel lblHoten;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblID1;
     private javax.swing.JLabel lblNamsinh;
     private javax.swing.JLabel lblSDT;
-    private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtGmail;
     private javax.swing.JTextField txtHoten;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNamsinh;
     private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }

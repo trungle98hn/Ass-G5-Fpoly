@@ -4,39 +4,39 @@
  * and open the template in the editor.
  */
 package vn.fpt.edu.beans;
-
 import java.util.Date;
-
 /**
  *
  * @author Admin
  */
-public class HoaDonXuat {
-    int mahdx;
-    Date ngayxuat;
+public class HoaDonNhap_DAO {
+    int mahdn;
+    Date ngaynhap;
     int mauser,gia;
 
-    public HoaDonXuat(int mahdx, Date ngayxuat, int mauser, int gia) {
-        this.mahdx = mahdx;
-        this.ngayxuat = ngayxuat;
+    public HoaDonNhap_DAO(int mahdn, Date ngaynhap, int mauser, int gia) {
+        this.mahdn = mahdn;
+        this.ngaynhap = ngaynhap;
         this.mauser = mauser;
         this.gia = gia;
     }
 
-    public int getMahdx() {
-        return mahdx;
+    
+
+    public int getMahdn() {
+        return mahdn;
     }
 
-    public void setMahdx(int mahdx) {
-        this.mahdx = mahdx;
+    public void setMahdn(int mahdn) {
+        this.mahdn = mahdn;
     }
 
-    public Date getNgayxuat() {
-        return ngayxuat;
+    public Date getNgaynhap() {
+        return ngaynhap;
     }
 
-    public void setNgayxuat(Date ngayxuat) {
-        this.ngayxuat = ngayxuat;
+    public void setNgaynhap(Date ngaynhap) {
+        this.ngaynhap = ngaynhap;
     }
 
     public int getMauser() {

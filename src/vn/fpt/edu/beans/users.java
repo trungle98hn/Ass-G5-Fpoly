@@ -38,10 +38,16 @@ public class users {
         this.taikhoan = taikhoan;
         this.gioitinh = gioitinh;
     }
+
+    public users() {
+    }
+
+    
 public void ThemNhanVien(int mauser, String ten, String sdt, String email, Date ngaysinh, String chucvu, String matkhau, String taikhoan, String gioitinh){
     
 }
-    public int getMauser() {
+
+public int getMauser() {
         return mauser;
     }
 

@@ -6,6 +6,7 @@
 package vn.fpt.edu.view;
 
 import javax.swing.JFrame;
+import vn.fpt.edu.process.LayduLieuNhanVien;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+    
     }
 
     /**
@@ -29,6 +31,7 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbltk = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         file = new javax.swing.JMenu();
         QuanLy = new javax.swing.JCheckBoxMenuItem();
@@ -43,8 +46,10 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý bán hàng siêu thị mini");
 
+        lbltk.setText("jLabel1");
+
         file.setMnemonic('f');
-        file.setText("File");
+        file.setText("tài khoản");
         file.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         QuanLy.setSelected(true);
@@ -58,7 +63,6 @@ public class Menu extends javax.swing.JFrame {
 
         TaiKhoan.setSelected(true);
         TaiKhoan.setText("Tài khoản");
-        TaiKhoan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Le Huy\\Desktop\\Photo for Design Form\\Photo for Design Form\\PNG\\Green\\18\\user.png")); // NOI18N
         TaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TaiKhoanActionPerformed(evt);
@@ -66,7 +70,6 @@ public class Menu extends javax.swing.JFrame {
         });
         file.add(TaiKhoan);
 
-        openMenuItem.setIcon(new javax.swing.ImageIcon("C:\\Users\\Le Huy\\Desktop\\Photo for Design Form\\Photo for Design Form\\PNG\\Green\\18\\arrow_right.png")); // NOI18N
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Đăng xuất");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +79,6 @@ public class Menu extends javax.swing.JFrame {
         });
         file.add(openMenuItem);
 
-        exitMenuItem.setIcon(new javax.swing.ImageIcon("C:\\Users\\Le Huy\\Desktop\\Photo for Design Form\\Photo for Design Form\\PNG\\yellow\\18\\close.png")); // NOI18N
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Thoát");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +91,7 @@ public class Menu extends javax.swing.JFrame {
         menuBar.add(file);
 
         functionMenu.setMnemonic('e');
-        functionMenu.setText("Function");
+        functionMenu.setText("làm việc");
         functionMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         banhang.setMnemonic('t');
@@ -127,26 +129,36 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(312, 312, 312)
+                .addComponent(lbltk)
+                .addContainerGap(554, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(lbltk)
+                .addContainerGap(329, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void QuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuanLyActionPerformed
-        FormQuanLy t = new FormQuanLy() {};
-       
+        FormQuanLy t = new FormQuanLy() {
+        };
+
         t.setVisible(true);
         t.setSize(900, 500);
         t.setLocationRelativeTo(null);
     }//GEN-LAST:event_QuanLyActionPerformed
 
     private void TaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaiKhoanActionPerformed
+       
         FormTaiKhoan t = new FormTaiKhoan();
+        FormDangNhap m=new FormDangNhap();
+      lbltk.setText(m.getTaikhoan());
         t.setVisible(true);
         t.setSize(900, 500);
         t.setLocationRelativeTo(null);
@@ -180,43 +192,52 @@ public class Menu extends javax.swing.JFrame {
         t.setSize(900, 500);
         t.setLocationRelativeTo(null);
     }//GEN-LAST:event_baocaoActionPerformed
-
-    /**
+    public void tk(String tk) {
+       
+        //FormDangNhap dn = new FormDangNhap();
+        //tk = dn.getTaikhoan();
+        LayduLieuNhanVien dlnv = new LayduLieuNhanVien();
+        System.out.println(tk + "tk");
+        FormTaiKhoan ftk = new FormTaiKhoan();
+        ftk.getTt(tk, dlnv.getmauserr(tk), dlnv.gettenn(tk), dlnv.getngaysinhh(tk), dlnv.getemaill(tk), dlnv.getsdtt(tk), dlnv.getchucvuu(tk));
+    }
+  /**
      * @param args the command line arguments
-     **/
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        Menu m = new Menu();
-//        m.setTitle("Quản lý siêu thị mini");
-//        m.setSize(1000, 700);
-//        m.setResizable(false);
-//        m.setLocationRelativeTo(null);
-//        m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        m.setVisible(true);
-//    }
+     *
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        Menu m = new Menu();
+        m.setTitle("Quản lý siêu thị mini");
+        m.setSize(1000, 700);
+        m.setResizable(false);
+        m.setLocationRelativeTo(null);
+        m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        m.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem QuanLy;
@@ -227,6 +248,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu file;
     private javax.swing.JMenu functionMenu;
     private javax.swing.JMenuItem khohang;
+    private javax.swing.JLabel lbltk;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     // End of variables declaration//GEN-END:variables

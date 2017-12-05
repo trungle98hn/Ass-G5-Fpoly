@@ -25,13 +25,13 @@ public class Connect extends JFrame{
     Connection cnn=null;
 
     public Connect() throws HeadlessException {
-   laydulieu();
+   //laydulieu();
     }
    
        
     public Connection getConnect(){
         try {
-            String url="jdbc:sqlserver://127.0.0.1:1433;databaseName=Quanlisieuthi";
+            String url="jdbc:sqlserver://127.0.0.1:1433;databaseName=QLST";
             String user="sa";
             String pass="123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -50,25 +50,5 @@ public class Connect extends JFrame{
     kq=stm.executeQuery(sql);
     return kq;
     }
-    public void Insert(String MANV,String TENNV,String GIOITINH,String NAMSINH,String DIACHI,String TRINHDO,String NGAYNDILAM ) throws SQLException{
-    Statement stm=this.cnn.createStatement();
-    String sql="INSERT INTO NHANVIEN VALUES('"+MANV+"','"+TENNV+"','"+GIOITINH+"','"+NAMSINH+"','"+DIACHI+"','"+TRINHDO+"','"+NGAYNDILAM+"')";
-    stm.executeQuery(sql);
-    }
-    public void Delete(String MANV) throws SQLException{
-    Statement stm=this.cnn.createStatement();
-    String sql="DELETE NHANVIEN where MANV='"+MANV+"'";
-    stm.executeQuery(sql);
-    }
-    public void Update(String MANV,String TENNV,String GIOITINH,String NAMSINH,String DIACHI,String TRINHDO,String NGAYNDILAM ) throws SQLException{
-    Statement stm=this.cnn.createStatement();
-    String sql="UPDATE NHANVIEN SET TENNV="+TENNV+" ,GIOITINH="+GIOITINH+",NAMSINH="+NAMSINH+",DIACHI="+DIACHI+",TRINHDO="+TRINHDO+",NGAYNDILAM="+NGAYNDILAM+" where MANV="+MANV+"";
-    stm.executeQuery(sql);
-    }
-   public void laydulieu(){
-   }
-
-    void Close() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 }
