@@ -5,12 +5,15 @@
  */
 package vn.fpt.edu.view;
 
+import java.awt.event.KeyEvent;
 import vn.fpt.edu.connect.Connect;
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import vn.fpt.edu.process.Check;
 
 /**
  *
@@ -30,31 +33,7 @@ public class FormDangNhap extends javax.swing.JFrame {
         
     }
 
-    public void check() {
-        String sql="select taikhoan,matkhau from users where taikhoan=? and matkhau=?";
-        try {
-            stm=cn.prepareStatement(sql);
-            stm.setString(1, txtTaiKhoan.getText());
-            stm.setString(2, txtMatKhau.getText());
-            ResultSet rs=stm.executeQuery();
-            while(rs.next()){
-             
-            
-            if(rs.getString(1).equals(txtTaiKhoan.getText())&&rs.getString(2
-            ).equals(txtMatKhau.getText())){
-                JOptionPane.showMessageDialog(null, "Login sucess");
-                FormQuanLy t=new FormQuanLy() {};
-                t.setVisible(true);
-        t.setSize(900, 500);
-        t.setLocationRelativeTo(null);}
-            else
-                JOptionPane.showMessageDialog(null, "sai tk/mk");}
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "lỗi ở "+ex);
-            Logger.getLogger(FormDangNhap.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,12 +48,9 @@ public class FormDangNhap extends javax.swing.JFrame {
         lblDangNhap = new javax.swing.JLabel();
         lblMatKhau = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
-        txtMatKhau = new javax.swing.JTextField();
         btnDangNhap = new javax.swing.JButton();
         txtTaiKhoan = new javax.swing.JTextField();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 500));
+        txtmatkhau = new javax.swing.JPasswordField();
 
         lblTaiKhoan.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblTaiKhoan.setText("Tài khoản");
@@ -88,13 +64,6 @@ public class FormDangNhap extends javax.swing.JFrame {
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblTitle.setText("PHẦN MỀM QUẢN LÝ BÁN HÀNG SIÊU THỊ MINI");
 
-        txtMatKhau.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMatKhauActionPerformed(evt);
-            }
-        });
-
         btnDangNhap.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDangNhap.setText("Đăng nhập");
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
@@ -105,12 +74,18 @@ public class FormDangNhap extends javax.swing.JFrame {
 
         txtTaiKhoan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        txtmatkhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtmatkhauKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(289, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -118,11 +93,11 @@ public class FormDangNhap extends javax.swing.JFrame {
                             .addComponent(lblMatKhau)
                             .addComponent(lblTaiKhoan))
                         .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(btnDangNhap)
-                            .addComponent(lblDangNhap)))
+                            .addComponent(lblDangNhap)
+                            .addComponent(txtmatkhau)))
                     .addComponent(lblTitle))
                 .addGap(259, 259, 259))
         );
@@ -138,10 +113,10 @@ public class FormDangNhap extends javax.swing.JFrame {
                     .addComponent(lblTaiKhoan)
                     .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMatKhau)
-                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(txtmatkhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(btnDangNhap)
                 .addContainerGap())
         );
@@ -149,18 +124,29 @@ public class FormDangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMatKhauActionPerformed
-
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-check();
-
+Check c=new Check();
+        String pass=new String(txtmatkhau.getPassword());
+c.check(txtTaiKhoan.getText(), pass);
+        System.out.println(getTaikhoan());
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
+    private void txtmatkhauKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmatkhauKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       Check c=new Check();
+        String pass=new String(txtmatkhau.getPassword());
+c.check(txtTaiKhoan.getText(), pass);
+        }
+    }//GEN-LAST:event_txtmatkhauKeyReleased
+   public String getTaikhoan(){
+       String taikhoan;
+       taikhoan=txtTaiKhoan.getText();
+       return taikhoan;
+   }
     /**
      * @param args the command line arguments
-     */
+     **/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
@@ -168,7 +154,7 @@ check();
     private javax.swing.JLabel lblMatKhau;
     private javax.swing.JLabel lblTaiKhoan;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTextField txtMatKhau;
     private javax.swing.JTextField txtTaiKhoan;
+    private javax.swing.JPasswordField txtmatkhau;
     // End of variables declaration//GEN-END:variables
 }
