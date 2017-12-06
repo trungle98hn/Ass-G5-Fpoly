@@ -28,6 +28,8 @@ public class TimHangHDX {
     Connection cnn = cn.getConnect();
 
     public TimHangHDX(String mahang) {
+        FormBanHang bh=new FormBanHang();
+
 //        String ten = null,soluong = null,trongluong = null,donvi = null,ngaysx = null,hsd = null,donggia;
      String sql = "select * from hanghoa where mahanghoa=?";
         try {
@@ -35,8 +37,7 @@ public class TimHangHDX {
             stm = cnn.prepareStatement(sql);
             stm.setString(1, mahang);
             rs = stm.executeQuery();
-            FormBanHang bh=new FormBanHang();
-          //String mahang, String ten, String soluong, String trongluong, String donvi, String ngaysx, String hsx, String hsd, String dongia
+                      //String mahang, String ten, String soluong, String trongluong, String donvi, String ngaysx, String hsx, String hsd, String dongia
             while (rs.next()) {
            bh.Tim(mahang, rs.getString(2), rs.getInt(7), rs.getString(3), rs.getString(4)
                         , rs.getString(5), rs.getString(6), rs.getString(8));

@@ -26,30 +26,19 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="73" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblTenHang" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDonVi" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNhaSanXuat" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtNhaSanXuat" min="-2" pref="145" max="-2" attributes="0"/>
-                          <Component id="cbDonVi" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTenHang" min="-2" pref="145" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblNgaySanXuat" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblHanSuDung" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtHanSuDung" min="-2" pref="145" max="-2" attributes="0"/>
-                          <Component id="txtNgaySanXuat" min="-2" pref="145" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="lblTenHang" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDonVi" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblNhaSanXuat" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblNgaySanXuat" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHanSuDung" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="txtNhaSanxuat" pref="145" max="32767" attributes="0"/>
+                  <Component id="cbbDv" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTenHang" pref="145" max="32767" attributes="0"/>
+                  <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jDateChooser2" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
           </Group>
@@ -60,7 +49,7 @@
                       <Group type="102" attributes="0">
                           <Component id="lblMaHang" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="55" pref="55" max="-2" attributes="0"/>
-                          <Component id="txtMaHang" min="-2" pref="145" max="-2" attributes="0"/>
+                          <Component id="txtma" min="-2" pref="145" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="lblGia" min="-2" max="-2" attributes="0"/>
@@ -70,7 +59,7 @@
                       <Group type="102" attributes="0">
                           <Component id="lblSoLuong" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
-                          <Component id="txtSoLuong" min="-2" pref="145" max="-2" attributes="0"/>
+                          <Component id="txtSoluong" min="-2" pref="145" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="107" pref="107" max="-2" attributes="0"/>
@@ -93,24 +82,24 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblDonVi" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbDonVi" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbbDv" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblNhaSanXuat" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtNhaSanXuat" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNhaSanxuat" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblNgaySanXuat" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtNgaySanXuat" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblNgaySanXuat" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblHanSuDung" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtHanSuDung" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblHanSuDung" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooser2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="112" max="32767" attributes="0"/>
+              <EmptySpace pref="118" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -120,7 +109,7 @@
                           <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                           <Component id="lblMaHang" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtMaHang" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtma" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -136,7 +125,7 @@
                           <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                           <Component id="lblSoLuong" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtSoLuong" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSoluong" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                   <Component id="btnQuayLai" min="-2" max="-2" attributes="0"/>
@@ -211,7 +200,7 @@
         <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtMaHang">
+    <Component class="javax.swing.JTextField" name="txtma">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -232,48 +221,33 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNhaSanXuat">
+    <Component class="javax.swing.JTextField" name="txtNhaSanxuat">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNgaySanXuat">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtHanSuDung">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtSoLuong">
+    <Component class="javax.swing.JTextField" name="txtSoluong">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSoLuongActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSoluongActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbDonVi">
+    <Component class="javax.swing.JComboBox" name="cbbDv">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Gam"/>
-            <StringItem index="1" value="Kg"/>
-            <StringItem index="2" value="h&#x1ed9;p"/>
-            <StringItem index="3" value="c&#xe1;i"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Kg"/>
+            <StringItem index="1" value="h&#x1ed9;p"/>
+            <StringItem index="2" value="c&#xe1;i"/>
           </StringArray>
         </Property>
       </Properties>
@@ -291,6 +265,10 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuayLaiActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
     </Component>
   </SubComponents>
 </Form>

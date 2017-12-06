@@ -16,7 +16,7 @@ import vn.fpt.edu.beans.dangnhap;
 public class Main {
     public static void main(String[] args) {
           
-        FormKhoHang m = new FormKhoHang();
+        Menu m = new Menu();
       
         m.setTitle("Quản lý siêu thị mini");
         m.setSize(1000,700);

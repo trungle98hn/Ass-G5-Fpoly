@@ -25,11 +25,11 @@ public class LuuKhiSua {
 
      public void LuuKhiSua(int mahanghoa, String tenhanghoa, String donvi, String nsx,
         String nhasanxuat, String hansudung, int soluong, int gia){
-        String sql="Update hanghoa set tenhanghoa="+tenhanghoa+",donvi="+donvi+",nsx="+nsx+",nhasanxuat="+nhasanxuat+",hansudung="+hansudung
-                +",soluong="+soluong+", gia="+gia+" where mahanghoa="+mahanghoa+"";
+        String sql="Update hanghoa set tenhanghoa="+tenhanghoa+",donvi=N'"+donvi+"',nsx='"+nsx+"',nhasanxuat="+nhasanxuat+",hansudung='"+hansudung
+                +"',soluong="+soluong+", gia="+gia+" where mahanghoa="+mahanghoa+"";
         try {
             stm=cn.prepareStatement(sql);
-            stm.executeQuery();
+            stm.executeUpdate();
             JOptionPane.showMessageDialog(null, "đã sửa");
         } catch (Exception e) {
             System.out.println(e);

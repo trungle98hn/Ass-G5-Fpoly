@@ -77,14 +77,12 @@ public class FormBanHang extends javax.swing.JFrame {
         lblTenHang = new javax.swing.JLabel();
         lblDonVi = new javax.swing.JLabel();
         cbDonVi = new javax.swing.JComboBox<>();
-        lblTrongLuong = new javax.swing.JLabel();
-        txtTrongLuong = new javax.swing.JTextField();
         lblNhaSanXuat = new javax.swing.JLabel();
         lblNgaySanXuat = new javax.swing.JLabel();
         lblHanSuDung = new javax.swing.JLabel();
         lblGia = new javax.swing.JLabel();
         lblSoLuong = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtma = new javax.swing.JTextField();
         txtTenHang = new javax.swing.JLabel();
         txtNgaySX = new javax.swing.JLabel();
         txtNSX = new javax.swing.JLabel();
@@ -122,11 +120,6 @@ public class FormBanHang extends javax.swing.JFrame {
         cbDonVi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "Hộp", "Cái" }));
 
-        lblTrongLuong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTrongLuong.setText("Trọng lượng");
-
-        txtTrongLuong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         lblNhaSanXuat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNhaSanXuat.setText("Nhà sản xuất");
 
@@ -142,9 +135,9 @@ public class FormBanHang extends javax.swing.JFrame {
         lblSoLuong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblSoLuong.setText("Số lượng");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtmaActionPerformed(evt);
             }
         });
 
@@ -164,7 +157,7 @@ public class FormBanHang extends javax.swing.JFrame {
                         .addComponent(lblSoLuong)))
                 .addGap(49, 49, 49)
                 .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtTenHang, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -173,14 +166,11 @@ public class FormBanHang extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNgaySanXuat)
-                    .addComponent(lblTrongLuong)
                     .addComponent(lblDonVi))
                 .addGap(42, 42, 42)
                 .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtTrongLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                        .addComponent(txtNgaySX, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(txtNgaySX, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnltopLayout.createSequentialGroup()
@@ -204,15 +194,13 @@ public class FormBanHang extends javax.swing.JFrame {
         pnltopLayout.setVerticalGroup(
             pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnltopLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
+                .addGap(4, 4, 4)
                 .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblMaHang, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTrongLuong)
-                    .addComponent(txtTrongLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNhaSanXuat)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNSX))
-                .addGap(13, 13, 13)
+                .addGap(15, 15, 15)
                 .addGroup(pnltopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblTenHang)
                     .addComponent(lblNgaySanXuat)
@@ -406,13 +394,12 @@ public class FormBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-//        Tim();
-TimHangHDX th=new TimHangHDX(jTextField1.getText());
+TimHangHDX th=new TimHangHDX(txtma.getText());
     }//GEN-LAST:event_btnTimActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmaActionPerformed
 
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtmaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         ThemHang();
@@ -423,9 +410,9 @@ TimHangHDX th=new TimHangHDX(jTextField1.getText());
         txtNgaySX.setText("");
         txtTenHang.setText("");
 
-        txtTrongLuong.setText("");
+       
         jSpinner1.setValue(0);
-        jTextField1.setText("");
+        txtma.setText("");
         getDataGioHang();
         tt();
     }//GEN-LAST:event_btnThemActionPerformed
@@ -447,7 +434,7 @@ TimHangHDX th=new TimHangHDX(jTextField1.getText());
     }//GEN-LAST:event_btnThanhToanActionPerformed
     public void Tim(String mahang, String ten, int soluong,  String donvi, String ngaysx, String hsx, String hsd, String dongia) {
 
-        jTextField1.setText(mahang);
+        txtma.setText(mahang);
         txtGia.setText(dongia);
         txtHSD.setText(hsd);
         txtNSX.setText(hsx);
@@ -493,7 +480,7 @@ TimHangHDX th=new TimHangHDX(jTextField1.getText());
 
         int a = Integer.parseInt(txtGia.getText());
         int b = (int) jSpinner1.getValue();
-        ThemHangVaoGio m = new ThemHangVaoGio(maHd, txtGia.getText(), jSpinner1.getValue() + "", jTextField1.getText(), a * b + "");
+        ThemHangVaoGio m = new ThemHangVaoGio(maHd, txtGia.getText(), jSpinner1.getValue() + "", txtma.getText(), a * b + "");
 
     }
 
@@ -523,7 +510,6 @@ TimHangHDX th=new TimHangHDX(jTextField1.getText());
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblDonVi;
     private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblGia1;
@@ -533,7 +519,6 @@ TimHangHDX th=new TimHangHDX(jTextField1.getText());
     private javax.swing.JLabel lblNhaSanXuat;
     private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTenHang;
-    private javax.swing.JLabel lblTrongLuong;
     private javax.swing.JLabel lblgia;
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JPanel pnlMain;
@@ -544,7 +529,7 @@ TimHangHDX th=new TimHangHDX(jTextField1.getText());
     private javax.swing.JLabel txtNgaySX;
     private javax.swing.JLabel txtTenHang;
     private javax.swing.JLabel txtTenNhanVien;
-    private javax.swing.JTextField txtTrongLuong;
+    private javax.swing.JTextField txtma;
     // End of variables declaration//GEN-END:variables
 }
 

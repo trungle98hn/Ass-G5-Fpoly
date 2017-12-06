@@ -5,6 +5,9 @@
  */
 package vn.fpt.edu.view;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import vn.fpt.edu.process.SearchHangPro;
 import vn.fpt.edu.view.*;
 
@@ -40,15 +43,15 @@ public class SearchHang extends javax.swing.JFrame {
         lblHanSuDung = new javax.swing.JLabel();
         lblGia = new javax.swing.JLabel();
         lblSoLuong = new javax.swing.JLabel();
-        txtMaHang = new javax.swing.JTextField();
+        txtma = new javax.swing.JTextField();
         txtTenHang = new javax.swing.JTextField();
         txtGia = new javax.swing.JTextField();
-        txtNhaSanXuat = new javax.swing.JTextField();
-        txtNgaySanXuat = new javax.swing.JTextField();
-        txtHanSuDung = new javax.swing.JTextField();
-        txtSoLuong = new javax.swing.JTextField();
-        cbDonVi = new javax.swing.JComboBox<>();
+        txtNhaSanxuat = new javax.swing.JTextField();
+        txtSoluong = new javax.swing.JTextField();
+        cbbDv = new javax.swing.JComboBox<>();
         btnQuayLai = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,27 +79,23 @@ public class SearchHang extends javax.swing.JFrame {
         lblSoLuong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblSoLuong.setText("Số lượng");
 
-        txtMaHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtTenHang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtGia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtNhaSanXuat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNhaSanxuat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtNgaySanXuat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txtHanSuDung.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txtSoLuong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtSoLuong.addActionListener(new java.awt.event.ActionListener() {
+        txtSoluong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSoluong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSoLuongActionPerformed(evt);
+                txtSoluongActionPerformed(evt);
             }
         });
 
-        cbDonVi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbDonVi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gam", "Kg", "hộp", "cái" }));
+        cbbDv.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbbDv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "hộp", "cái" }));
 
         btnQuayLai.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnQuayLai.setText("Quay lại");
@@ -113,24 +112,18 @@ public class SearchHang extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTenHang)
-                            .addComponent(lblDonVi)
-                            .addComponent(lblNhaSanXuat))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNhaSanXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTenHang, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNgaySanXuat)
-                            .addComponent(lblHanSuDung))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtHanSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgaySanXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblTenHang)
+                    .addComponent(lblDonVi)
+                    .addComponent(lblNhaSanXuat)
+                    .addComponent(lblNgaySanXuat)
+                    .addComponent(lblHanSuDung))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNhaSanxuat, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(cbbDv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenHang, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(73, 73, 73))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -139,7 +132,7 @@ public class SearchHang extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblMaHang)
                             .addGap(55, 55, 55)
-                            .addComponent(txtMaHang, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblGia)
                             .addGap(89, 89, 89)
@@ -147,7 +140,7 @@ public class SearchHang extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblSoLuong)
                             .addGap(52, 52, 52)
-                            .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSoluong, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(107, 107, 107)
                             .addComponent(btnQuayLai)))
@@ -163,20 +156,20 @@ public class SearchHang extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDonVi)
-                    .addComponent(cbDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbDv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNhaSanXuat)
-                    .addComponent(txtNhaSanXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNhaSanxuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNgaySanXuat)
-                    .addComponent(txtNgaySanXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHanSuDung)
-                    .addComponent(txtHanSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(118, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -184,7 +177,7 @@ public class SearchHang extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(3, 3, 3)
                             .addComponent(lblMaHang))
-                        .addComponent(txtMaHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(226, 226, 226)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -196,7 +189,7 @@ public class SearchHang extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(3, 3, 3)
                             .addComponent(lblSoLuong))
-                        .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSoluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
                     .addComponent(btnQuayLai)
                     .addGap(0, 0, Short.MAX_VALUE)))
@@ -205,31 +198,50 @@ public class SearchHang extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
+    private void txtSoluongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoluongActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSoLuongActionPerformed
+    }//GEN-LAST:event_txtSoluongActionPerformed
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
+        close();
     }//GEN-LAST:event_btnQuayLaiActionPerformed
-public void Search(String mahang,String ten,String donvi,String date,String nhasx,String hsd,int soluong,int gia){
+public void close(){
+this.dispose();
+}
+public void data(int mahanghoa, String tenhanghoa, String donvi, String nsx,
+        String nhasanxuat, String hansudung, int soluong, int gia) throws ParseException {
+txtma.setText(mahanghoa+"");
+txtSoluong.setText(soluong+"");
+if(donvi.equalsIgnoreCase("kg")){
+cbbDv.setSelectedIndex(0);
+}
+if(donvi.equalsIgnoreCase("Hộp")){
+cbbDv.setSelectedIndex(1);
+}
+else{
+cbbDv.setSelectedIndex(2);
+}
+Date date = new SimpleDateFormat("yyyy-mm-dd").parse(nsx);
+Date date1 = new SimpleDateFormat("yyyy-mm-dd").parse(hansudung);
+jDateChooser1.setDate(date);
+jDateChooser2.setDate(date1);
+txtNhaSanxuat.setText(nhasanxuat);
 
 txtGia.setText(gia+"");
-txtHanSuDung.setText(hsd);
-txtMaHang.setText(mahang+"");
-txtNgaySanXuat.setText(date);
-txtNhaSanXuat.setText(nhasx);
-txtSoLuong.setText(soluong+"");
-txtTenHang.setText(ten);
-
+txtTenHang.setText(tenhanghoa);
 }
+
+
     /**
      * @param args the command line arguments
      **/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnQuayLai;
-    private javax.swing.JComboBox<String> cbDonVi;
+    private javax.swing.JComboBox<String> cbbDv;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel lblDonVi;
     private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblHanSuDung;
@@ -239,11 +251,9 @@ txtTenHang.setText(ten);
     private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTenHang;
     private javax.swing.JTextField txtGia;
-    private javax.swing.JTextField txtHanSuDung;
-    private javax.swing.JTextField txtMaHang;
-    private javax.swing.JTextField txtNgaySanXuat;
-    private javax.swing.JTextField txtNhaSanXuat;
-    private javax.swing.JTextField txtSoLuong;
+    private javax.swing.JTextField txtNhaSanxuat;
+    private javax.swing.JTextField txtSoluong;
     private javax.swing.JTextField txtTenHang;
+    private javax.swing.JTextField txtma;
     // End of variables declaration//GEN-END:variables
 }

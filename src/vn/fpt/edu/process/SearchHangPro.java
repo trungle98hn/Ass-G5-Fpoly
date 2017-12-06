@@ -8,6 +8,11 @@ package vn.fpt.edu.process;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import vn.fpt.edu.beans.hanghoa;
 import vn.fpt.edu.connect.Connect;
 import vn.fpt.edu.view.SearchHang;
 
@@ -20,25 +25,23 @@ public class SearchHangPro {
     Connection cn = cnn.getConnect();
     PreparedStatement stm = null;
     ResultSet rs = null;
-    public SearchHangPro(String mahang) {
+    public SearchHangPro(String mahang) throws ParseException {
+        String sql="Select * from hanghoa where mahanghoa="+mahang+" ";
         SearchHang sh=new SearchHang();
-        
-        String sql="Select * fromhanghoa where mahanghoa=?";
-        try {
-            stm=cn.prepareStatement(sql);
-            stm.setString(1, mahang);
-            rs=stm.executeQuery();
-            while(rs.next()){
-           sh.Search(mahang, rs.getString(2),rs.getString(3) , rs.getString(4)
-                   , rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
-            
-            }
-           
-               // SearchHang sh=new SearchHang();
-    
-        } catch (Exception e) {
-        }
-
+         try {
+             stm=cn.prepareStatement(sql);
+             rs=stm.executeQuery();
+             while(rs.next()){
+                 hanghoa hh=new hanghoa(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                         rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
+            sh.data(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                         rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(SuaHangHoa.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        sh.setVisible(true);
+        sh.setSize(400, 430);
     }
     
 }

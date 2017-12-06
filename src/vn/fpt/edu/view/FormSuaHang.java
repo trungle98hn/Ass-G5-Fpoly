@@ -54,7 +54,7 @@ public class FormSuaHang extends javax.swing.JFrame {
         txtTenHang = new javax.swing.JTextField();
         txtMahang7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtma.setEditable(false);
         txtma.setText("jTextField1");

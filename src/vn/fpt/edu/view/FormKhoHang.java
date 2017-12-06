@@ -225,7 +225,11 @@ mahang=(String) table.getValueAt(table.getSelectedRow(),1);
 return mahang;
 }
     private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
-
+ try {
+            SuaHangHoa shh=new SuaHangHoa(txtTim.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(FormKhoHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_txtTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -260,10 +264,13 @@ public String mahang(){
 return txtTim.getText();
 }
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-    SearchHang sh=new SearchHang();
-        SearchHangPro shp=new SearchHangPro(txtTim.getText());
- sh.setVisible(true);
-sh.setSize(300, 500);
+   
+        try {
+            SearchHangPro shp=new SearchHangPro(txtTim.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(FormKhoHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btnTimActionPerformed
     public void Tim() {
         String sql = "select * form hanghoa where mahanghoa=?";
