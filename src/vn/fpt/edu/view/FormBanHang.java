@@ -54,7 +54,7 @@ public class FormBanHang extends javax.swing.JFrame {
         users u = new users();
         System.out.println(maHd);
         txtTenNhanVien.setText(u.getMauser() + "");
-       // getDataGioHang();
+        // getDataGioHang();
 
         //  String a=(String) jSpinner1.getValue();
         //  int giatien=Integer.parseInt(txtGia.getText())*Integer.parseInt(a);
@@ -401,12 +401,13 @@ public class FormBanHang extends javax.swing.JFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        
+
         xoa();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        Tim();
+//        Tim();
+TimHangHDX th=new TimHangHDX(jTextField1.getText());
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -426,54 +427,40 @@ public class FormBanHang extends javax.swing.JFrame {
         jSpinner1.setValue(0);
         jTextField1.setText("");
         getDataGioHang();
-        thanhtien();
+        tt();
     }//GEN-LAST:event_btnThemActionPerformed
-
+    public void tt() {
+        TinhTienHDX tt = new TinhTienHDX();
+        int a = tt.TinhTienHDX(maHd, jTable1.getRowCount());
+        String b = Integer.toString(a);
+        lblgia.setText(b);
+    }
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         thanhtoan();
         try {
-            XuatHDX hdx=new XuatHDX(maHd);
+            XuatHDX hdx = new XuatHDX(maHd);
         } catch (IOException ex) {
             Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
         } catch (WriteException ex) {
             Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
-    public void Tim() {
-        String sql = "select * from hanghoa where mahanghoa=?";
-        try {
-            ;
-            stm = cnn.prepareStatement(sql);
-            stm.setString(1, jTextField1.getText());
-            rs = stm.executeQuery();
-            Vector data = new Vector();
-            while (rs.next()) {
-                Vector user = new Vector();
-                jTextField1.setText(rs.getString(1));
-                txtTenHang.setText(rs.getString(2));
-                JTextField donVi = new JTextField();
-                donVi.setText(rs.getString(3));
-                String a = donVi.getText();
-                if (a.equalsIgnoreCase("Kg")) {
-                    cbDonVi.setSelectedIndex(0);
-                } else if (a.equalsIgnoreCase("Hộp")) {
-                    cbDonVi.setSelectedIndex(1);
-                } else {
-                    cbDonVi.setSelectedIndex(2);
-                }
+    public void Tim(String mahang, String ten, int soluong,  String donvi, String ngaysx, String hsx, String hsd, String dongia) {
 
-                txtNgaySX.setText(rs.getString(4));
-                txtNSX.setText(rs.getString(5));
-                txtHSD.setText(rs.getString(6));
-                txtGia.setText(rs.getString(8));
-                jLabel2.setText(rs.getString(7));
+        jTextField1.setText(mahang);
+        txtGia.setText(dongia);
+        txtHSD.setText(hsd);
+        txtNSX.setText(hsx);
+        txtNgaySX.setText(ngaysx);
+        txtTenHang.setText(ten);
 
-            }
-            jSpinner1.setEnabled(true);
-            // tableList.setModel(new DefaultTableModel(data, tittle));
-        } catch (SQLException ex) {
-            Logger.getLogger(FormQuanLy.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       // txtTrongLuong.setText(trongluong);
+        jSpinner1.setValue(soluong);
+
+    }
+
+    public void search(int maHd, String mahang, String ten, String soluong, String trongluong, String donvi, String ngaysx, String hsx, String hsd, String dongia) {
+
     }
 
     public void close() {
@@ -481,112 +468,24 @@ public class FormBanHang extends javax.swing.JFrame {
     }
 
     public void thanhtoan() {
-        String sql = "select thanhthien from chitiethdx where mahdx=" + maHd + "";
-        int tien = 0;
-
-        int b = 0;
-        Vector a = new Vector();
-        Vector c = new Vector();
-        int i = jTable1.getRowCount();
-
-        try {
-            stm = cnn.prepareStatement(sql);
-            rs = stm.executeQuery();
-            while (rs.next()) {
-                a.add(rs.getInt(1));
-
-                System.out.println("a" + a);
-                // tien+=tien;
-            }
-            for (int k = 0; k < i; k++) {
-                System.out.println("for :" + a.elementAt(k));
-                tien = (int) a.elementAt(k);
-                b = tien + b;
-                System.out.println(b);
-            }
-            lblgia.setText(b + "");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String sql2 = "update hoadonxuat set gia=" + b + " where mahdx=" + maHd + "";
-        try {
-            stm = cnn.prepareStatement(sql2);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        close();
-        FormBanHang t = new FormBanHang();
-        t.setVisible(true);
-        t.setSize(900, 500);
-        t.setLocationRelativeTo(null);
+        TinhTienHDX tt = new TinhTienHDX();
+        tt.ThanhToan(maHd, jTable1.getRowCount());
 
     }
 
     public void getDataGioHang() {
-        String sql = "Select * from chitietHDX  where mahdx=?";
         Vector head = new Vector();
-        Vector head1 = new Vector();
-        Vector data = new Vector();
+
         head.add("mã HDX");
         head.add("Đơn giá");
         head.add("Số lượng");
         head.add("Mã Hàng");
         head.add("Thành tiền");
 
-        try {
-            stm = cnn.prepareStatement(sql);
-            stm.setString(1, maHd + "");
-            rs = stm.executeQuery();
+        getDataHDX dt = new getDataHDX();
+        // dt.getDataHDX(maHd);
 
-            while (rs.next()) {
-
-                ChiTietHDX cthdx = new ChiTietHDX(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
-                data.add(cthdx.getMaHDX());
-                data.add(cthdx.getGiatien());
-                data.add(cthdx.getSoluonghang());
-                data.add(cthdx.getMahanghoa());
-                data.add(cthdx.getThanhtien());
-                head1.add(data);
-            }
-
-            jTable1.setModel(new DefaultTableModel(head1, head));
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public void thanhtien(){
-        String sql1 = "select thanhthien from chitiethdx where mahdx=" + maHd + "";
-        int tien = 0;
-
-        int b = 0;
-        Vector a = new Vector();
-        Vector c = new Vector();
-        int i = jTable1.getRowCount();
-
-        try {
-            stm = cnn.prepareStatement(sql1);
-            rs = stm.executeQuery();
-            while (rs.next()) {
-                a.add(rs.getInt(1));
-
-                System.out.println("a" + a);
-                // tien+=tien;
-            }
-            for (int k = 0; k < i; k++) {
-                System.out.println("for :" + a.elementAt(k));
-                tien = (int) a.elementAt(k);
-                b = tien + b;
-                System.out.println(b);
-            }
-            lblgia.setText(b + "");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        jTable1.setModel(new DefaultTableModel(dt.getDataHDX(maHd), head));
 
     }
 
@@ -599,11 +498,11 @@ public class FormBanHang extends javax.swing.JFrame {
     }
 
     public void xoa() {
-        int row=jTable1.getSelectedRow();
-        int a=(int) jTable1.getValueAt(row, 1);
-       // if(JOptionPane.showConfirmDialog(null, maHd, mdh, WIDTH, HEIGHT))
-       XoaHangTrongGio xh=new XoaHangTrongGio(a,maHd);
-       getDataGioHang();
+        int row = jTable1.getSelectedRow();
+        int a = (int) jTable1.getValueAt(row, 1);
+        // if(JOptionPane.showConfirmDialog(null, maHd, mdh, WIDTH, HEIGHT))
+        XoaHangTrongGio xh = new XoaHangTrongGio(a, maHd);
+        getDataGioHang();
 
     }
 

@@ -20,15 +20,15 @@ public class ThemHangVaoGioNhap {
     ResultSet rs = null;
     Connect cn = new Connect();
     Connection cnn = cn.getConnect();
-    public ThemHangVaoGioNhap(String mahang,String maHd,String soLuong,String giatien, String thanhtien) {
+    public ThemHangVaoGioNhap(String mahang,int maHd,int soLuong,int giatien, int thanhtien) {
          String sql = "insert into ChitietHDN values(?,?,?,?,?)";
          try {
             stm=cnn.prepareStatement(sql);
             stm.setString(1, mahang);
-            stm.setString(2, maHd);
-            stm.setString(3, soLuong);
-            stm.setString(4, giatien);
-            stm.setString(5, thanhtien);
+            stm.setInt(2, maHd);
+            stm.setInt(3, soLuong);
+            stm.setInt(4, giatien);
+            stm.setInt(5, thanhtien=soLuong*giatien);
             stm.executeUpdate();
             
              

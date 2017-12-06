@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.*;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
@@ -19,6 +20,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import vn.fpt.edu.connect.Connect;
+import vn.fpt.edu.process.SearchHangPro;
+import vn.fpt.edu.process.SuaHangHoa;
+import vn.fpt.edu.process.getDataHangHoa;
 
 /**
  *
@@ -46,7 +50,7 @@ public class FormKhoHang extends javax.swing.JFrame {
 
     public void getdata() {
 
-        Vector data = new Vector();
+        //Vector data = new Vector();
         Vector header = new Vector();
         header.add("STT");
         header.add("Mã HH");
@@ -60,33 +64,8 @@ public class FormKhoHang extends javax.swing.JFrame {
         
         table.setPreferredScrollableViewportSize(new Dimension(1000, 230));
 
-        String sql = "Select * FROM HANGHOA";
-        try {
-            st = cn.createStatement();
-            rs = st.executeQuery(sql);
-            int i = 1;
-            while (rs.next()) {
-                Vector data1 = new Vector();
-
-                data1.add(i);
-                data1.add(rs.getString(1));
-                data1.add(rs.getString(2));
-                data1.add(rs.getString(3));
-                data1.add(rs.getString(4));
-                data1.add(rs.getString(5));
-                data1.add(rs.getString(6));
-                data1.add(rs.getString(7));
-                data1.add(rs.getString(8));
-               
-                data.add(data1);
-                table.setModel(new DefaultTableModel(data, header));
-                i++;
-
-            }
-
-        } catch (Exception e) {
-        }
-        table.setModel(new DefaultTableModel(data, header));
+      getDataHangHoa dt=new getDataHangHoa();
+        table.setModel(new DefaultTableModel(dt.getDataHangHoa(), header));
 
         jScrollPane1.setViewportView(table);
     }
@@ -234,49 +213,17 @@ public class FormKhoHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        int row = table.getSelectedRow();
-        String mahang = (String) table.getValueAt(row, 1);
-        String sql = "update hanghoa set tenhanghoa=?,donvi=?,trongluong=?,nsx=?,nhasanxuat=?,hansudung=?,soluong=?,gia=? where mahanghoa=?";
         try {
-
-            stm = cn.prepareStatement(sql);
-            rs = stm.executeQuery();
-            Vector data = new Vector();
-            Vector header = new Vector();
-            header.add("STT");
-            header.add("Mã HH");
-            header.add("Tên HH");
-            header.add("Đơn vị");
-            header.add("Trọng Lượng");
-            header.add("Nhà sản xuất");
-            header.add("Ngày sản xuất");
-            header.add("Hạn sử dụng");
-            header.add("Giá tiền");
-            header.add("Số lượng");
-            while (rs.next()) {
-                int i = 1;
-                Vector data1 = new Vector();
-
-                data1.add(i);
-                data1.add(rs.getString(1));
-                data1.add(rs.getString(2));
-                data1.add(rs.getString(3));
-                data1.add(rs.getString(4));
-                data1.add(rs.getString(5));
-                data1.add(rs.getString(6));
-                data1.add(rs.getString(7));
-                data1.add(rs.getString(8));
-                data1.add(rs.getString(9));
-                data.add(data1);
-                table.setModel(new DefaultTableModel(data, header));
-
-            }
-            stm.setString(1, sql);
-
-        } catch (Exception e) {
+            SuaHangHoa shh=new SuaHangHoa((String) table.getValueAt(table.getSelectedRow(),1));
+        } catch (ParseException ex) {
+            Logger.getLogger(FormKhoHang.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSuaActionPerformed
-
+public String  Sua(){
+String mahang;
+mahang=(String) table.getValueAt(table.getSelectedRow(),1);
+return mahang;
+}
     private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
 
     }//GEN-LAST:event_txtTimActionPerformed
@@ -309,14 +256,14 @@ public class FormKhoHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "lỗi" + e);
         }
     }//GEN-LAST:event_btnXoaActionPerformed
-
+public String mahang(){
+return txtTim.getText();
+}
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-        FormTimHang m = new FormTimHang();
-        m.setVisible(true);
-        m.setLocationRelativeTo(null);
-        m.setSize(350, 370);
-
-
+    SearchHang sh=new SearchHang();
+        SearchHangPro shp=new SearchHangPro(txtTim.getText());
+ sh.setVisible(true);
+sh.setSize(300, 500);
     }//GEN-LAST:event_btnTimActionPerformed
     public void Tim() {
         String sql = "select * form hanghoa where mahanghoa=?";
@@ -388,9 +335,7 @@ public class FormKhoHang extends javax.swing.JFrame {
         }
     }
 
-    public String mahang() {
-        return txtTim.getText();
-    }
+
     /**
      * @param args the command line arguments
      */

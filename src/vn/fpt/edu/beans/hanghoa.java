@@ -14,13 +14,13 @@ import java.util.Date;
 public class hanghoa {
     int mahanghoa;
     String tenhanghoa,donvi;
-    Date nsx;
+    String nsx;
     String nhasanxuat;
-    Date hansudung;
+    String hansudung;
     int soluong;
     int gia;
 
-    public hanghoa(int mahanghoa, String tenhanghoa, String donvi, Date nsx, String nhasanxuat, Date hansudung, int soluong, int gia) {
+    public hanghoa(int mahanghoa, String tenhanghoa, String donvi, String nsx, String nhasanxuat, String hansudung, int soluong, int gia) {
         this.mahanghoa = mahanghoa;
         this.tenhanghoa = tenhanghoa;
         this.donvi = donvi;
@@ -55,11 +55,11 @@ public class hanghoa {
         this.donvi = donvi;
     }
 
-    public Date getNsx() {
+    public String getNsx() {
         return nsx;
     }
 
-    public void setNsx(Date nsx) {
+    public void setNsx(String nsx) {
         this.nsx = nsx;
     }
 
@@ -71,11 +71,11 @@ public class hanghoa {
         this.nhasanxuat = nhasanxuat;
     }
 
-    public Date getHansudung() {
+    public String getHansudung() {
         return hansudung;
     }
 
-    public void setHansudung(Date hansudung) {
+    public void setHansudung(String hansudung) {
         this.hansudung = hansudung;
     }
 

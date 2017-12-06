@@ -42,7 +42,7 @@ public class FormNhapHang extends javax.swing.JFrame {
     int maHd = tm.getMhd();
     String mdh;
     Vector head = new Vector();
-    Vector head1 = new Vector();
+ //   Vector head1 = new Vector();
     Vector data = new Vector();
 
     /**
@@ -294,8 +294,9 @@ public class FormNhapHang extends javax.swing.JFrame {
                     .addGroup(pnlBottomLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btnLuu, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBottomLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -359,7 +360,9 @@ public class FormNhapHang extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 inserthanghoa();
-       ThemHang();
+addhang();
+      // ThemHang();
+       
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void txtMaHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaHangActionPerformed
@@ -371,30 +374,34 @@ inserthanghoa();
         String goidate = dateFormat.format(jDateChooser1.getDate());
         String goidate2 = dateFormat.format(jDateChooser2.getDate());
     int sl=   (int) jSpinner2.getValue();
-        
+        String gia=txtDonGia.getText();
+        int gja=Integer.parseInt(gia);
        ThemHang tm=new ThemHang(txtMaHang.getText(), txtTenHang.getText(), (String) cbDonVi2.getSelectedItem(), goidate,txtNhaSx.getText() , goidate2, sl+"", txtDonGia.getText());
+       ThemHangVaoGioNhap thvg=new ThemHangVaoGioNhap(txtMaHang.getText(), maHd, sl, gja,gja*sl );
    }
     public void addhang() {
-         String sql = "Select * from chitietHDn  where mahdn=?";
-
+        int ma=tm.getMhd();
+         String sql = "Select * from chitietHDn  where mahdn="+ma+"";
+ Vector head1 = new Vector();
         try {
             stm = cnn.prepareStatement(sql);
-            stm.setString(1, maHd + "");
+            
             rs = stm.executeQuery();
 
 //đéo hiểu sao query ra 2 cái giống nhau :3 
             while (rs.next()) {
 
-                ChiTietHDN cthdx = new ChiTietHDN(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
-                data.add(cthdx.getMahanghoa());
-                data.add(cthdx.getMahdn());
-                data.add(cthdx.getSuongluonghang());
-                data.add(cthdx.getGiatien());
-                data.add(cthdx.getThanhtien());
+               // ChiTietHDN cthdx = new ChiTietHDN(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                data.add(rs.getInt(1));
+                data.add(rs.getInt(2));
+                data.add(rs.getInt(3));
+                data.add(rs.getInt(4));
+                data.add(rs.getInt(5));
                 head1.add(data);
             }
-
           jTable1.setModel(new DefaultTableModel(head1, head));
+            System.out.println(head1);
+            System.out.println(maHd+"mã"+ma);
         } catch (SQLException ex) {
             System.out.println(ex);
             Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
@@ -419,7 +426,7 @@ inserthanghoa();
             stm = cnn.prepareStatement(sql);
             stm.setString(1, maHd + "");
             rs = stm.executeQuery();
-
+ Vector head1 = new Vector();
 //đéo hiểu sao query ra 2 cái giống nhau :3 
             while (rs.next()) {
 
