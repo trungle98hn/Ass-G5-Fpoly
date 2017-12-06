@@ -18,7 +18,7 @@ import vn.fpt.edu.connect.Connect;
 import vn.fpt.edu.process.LayduLieuNhanVien;
 import vn.fpt.edu.process.SuaNhanVien;
 import vn.fpt.edu.process.XoaNhanVien;
-import vn.fpt.edu.process.getManv;
+import vn.fpt.edu.process.*;
 
 /**
  *
@@ -40,6 +40,7 @@ public class FormQuanLy extends javax.swing.JFrame {
 
         initComponents();
         layData();
+        txtTimKiem.setDocument(new DigitsDocument()); 
 
     }
 
@@ -242,7 +243,7 @@ LayduLieuNhanVien dl=new LayduLieuNhanVien();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-      FormSuaUsers t = new FormSuaUsers();
+      FormTimUser t = new FormTimUser();
         t.setVisible(true);
         //t.setSize(380, 500);
         t.setLocationRelativeTo(null);

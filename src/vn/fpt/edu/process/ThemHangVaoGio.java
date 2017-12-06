@@ -34,6 +34,7 @@ public class ThemHangVaoGio {
              
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "chưa chọn hàng");
         }
     }
     

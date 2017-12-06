@@ -54,6 +54,8 @@ public class FormBanHang extends javax.swing.JFrame {
         users u = new users();
         System.out.println(maHd);
         txtTenNhanVien.setText(u.getMauser() + "");
+        txtma.setDocument(new DigitsDocument());
+        
         // getDataGioHang();
 
         //  String a=(String) jSpinner1.getValue();
@@ -394,7 +396,7 @@ public class FormBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-TimHangHDX th=new TimHangHDX(txtma.getText());
+        Tim();
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void txtmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmaActionPerformed
@@ -423,6 +425,7 @@ TimHangHDX th=new TimHangHDX(txtma.getText());
         lblgia.setText(b);
     }
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        
         thanhtoan();
         try {
             XuatHDX hdx = new XuatHDX(maHd);
@@ -432,24 +435,45 @@ TimHangHDX th=new TimHangHDX(txtma.getText());
             Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
-    public void Tim(String mahang, String ten, int soluong,  String donvi, String ngaysx, String hsx, String hsd, String dongia) {
+    public void Tim() {
+        String sql = "select * from hanghoa where mahanghoa=?";
+        try {
+            ;
+            stm = cnn.prepareStatement(sql);
+            stm.setString(1, txtma.getText());
+            rs = stm.executeQuery();
+            Vector data = new Vector();
+            while (rs.next()) {
+                Vector user = new Vector();
+                txtma.setText(rs.getString(1));
+                txtTenHang.setText(rs.getString(2));
+                JTextField donVi = new JTextField();
+                donVi.setText(rs.getString(3));
+                String a = donVi.getText();
+                if (a.equalsIgnoreCase("Kg")) {
+                    cbDonVi.setSelectedIndex(0);
+                } else if (a.equalsIgnoreCase("Hộp")) {
+                    cbDonVi.setSelectedIndex(1);
+                } else {
+                    cbDonVi.setSelectedIndex(2);
+                }
 
-        txtma.setText(mahang);
-        txtGia.setText(dongia);
-        txtHSD.setText(hsd);
-        txtNSX.setText(hsx);
-        txtNgaySX.setText(ngaysx);
-        txtTenHang.setText(ten);
+                txtNgaySX.setText(rs.getString(4));
+                txtNSX.setText(rs.getString(5));
+                txtHSD.setText(rs.getString(6));
+                txtGia.setText(rs.getString(8));
+                jLabel2.setText(rs.getString(7));
 
-       // txtTrongLuong.setText(trongluong);
-        jSpinner1.setValue(soluong);
-
+            }
+            jSpinner1.setEnabled(true);
+            // tableList.setModel(new DefaultTableModel(data, tittle));
+        } catch (SQLException ex) {
+            Logger.getLogger(FormQuanLy.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "ko có hàng");
+        }
     }
 
-    public void search(int maHd, String mahang, String ten, String soluong, String trongluong, String donvi, String ngaysx, String hsx, String hsd, String dongia) {
-
-    }
-
+    
     public void close() {
         this.dispose();
     }
@@ -477,11 +501,14 @@ TimHangHDX th=new TimHangHDX(txtma.getText());
     }
 
     public void ThemHang() {
-
+try{
         int a = Integer.parseInt(txtGia.getText());
         int b = (int) jSpinner1.getValue();
         ThemHangVaoGio m = new ThemHangVaoGio(maHd, txtGia.getText(), jSpinner1.getValue() + "", txtma.getText(), a * b + "");
-
+}
+catch(Exception e){
+JOptionPane.showMessageDialog(null, "chưa chọn hàng");
+}
     }
 
     public void xoa() {

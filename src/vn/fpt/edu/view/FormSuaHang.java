@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
 import vn.fpt.edu.process.LuuKhiSua;
-import vn.fpt.edu.process.SuaHangHoa;
+import vn.fpt.edu.process.*;
 
 /**
  *
@@ -24,6 +24,8 @@ public class FormSuaHang extends javax.swing.JFrame {
      */
     public FormSuaHang() {
         initComponents();
+        txtGia.setDocument(new DigitsDocument()); 
+        txtSoluong.setDocument(new DigitsDocument()); 
     }
 
     /**

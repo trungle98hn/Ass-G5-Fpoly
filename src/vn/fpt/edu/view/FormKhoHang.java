@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import vn.fpt.edu.connect.Connect;
 import vn.fpt.edu.process.SearchHangPro;
 import vn.fpt.edu.process.SuaHangHoa;
-import vn.fpt.edu.process.getDataHangHoa;
+import vn.fpt.edu.process.*;
 
 /**
  *
@@ -45,6 +45,7 @@ public class FormKhoHang extends javax.swing.JFrame {
     public FormKhoHang() {
         initComponents();
         getdata();
+        txtTim.setDocument(new DigitsDocument()); 
        
     }
 
@@ -257,7 +258,7 @@ return mahang;
             getdata();
             JOptionPane.showMessageDialog(null, "đã xóa");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "lỗi" + e);
+            JOptionPane.showMessageDialog(null, "hàng đã được bán,ko thể xóa");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 public String mahang(){

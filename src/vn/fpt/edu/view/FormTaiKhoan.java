@@ -5,6 +5,8 @@
  */
 package vn.fpt.edu.view;
 
+import vn.fpt.edu.process.Check;
+
 /**
  *
  * @author Le Huy
@@ -16,6 +18,7 @@ public class FormTaiKhoan extends javax.swing.JFrame {
      */
     public FormTaiKhoan() {
         initComponents();
+        
     }
 
     /**
@@ -188,6 +191,7 @@ public class FormTaiKhoan extends javax.swing.JFrame {
         t.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnDoimatkhauActionPerformed
     public void getTt(String taikhoan, String id, String ten, String namsinh, String email, String sdt, String chucvu) {
+        
         txtTaiKhoan.setText(taikhoan);
         txtID.setText(id);
         System.out.println(id+"tab Ftk");

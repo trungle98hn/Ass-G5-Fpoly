@@ -8,6 +8,9 @@ package vn.fpt.edu.process;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vn.fpt.edu.connect.Connect;
 
@@ -25,7 +28,9 @@ public class ThemHang {
     public ThemHang(String mahanghoa, String tenhanghoa, String donvi, String nsx, String nhasanxuat, String hansudung, String soluong, String gia) {
         if (mahanghoa.isEmpty() || tenhanghoa.isEmpty() || donvi.isEmpty() || nsx.isEmpty() || nhasanxuat.isEmpty() || hansudung.isEmpty() || soluong.isEmpty() || gia.isEmpty()) {
             JOptionPane.showMessageDialog(null, "ko được bỏ trống bất cứ trường nào!!");
-        } else {
+        }
+        
+        else {
 
             String sql = "insert into hanghoa values(?,?,?,?,?,?,?,?)";
             try {
@@ -47,6 +52,21 @@ public class ThemHang {
             }
         }
 
+    }
+    public void ktra(){
+        String sql="Select soluong from hanghoa where tenhanghoa=?";
+        try {
+            stm=cn.prepareStatement(sql);
+            rs=stm.executeQuery();
+            while(rs.next()){
+                
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ThemHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    
     }
 
 }

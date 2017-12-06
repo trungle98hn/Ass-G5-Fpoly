@@ -9,41 +9,40 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTextField;
 import vn.fpt.edu.connect.Connect;
 import vn.fpt.edu.view.FormBanHang;
-import vn.fpt.edu.view.FormQuanLy;
 
 /**
  *
  * @author Admin
  */
 public class TimHangHDX {
- PreparedStatement stm = null;
+
+    Connect cnn = new Connect();
+    Connection cn = cnn.getConnect();
+    PreparedStatement stm = null;
     ResultSet rs = null;
-    Connect cn = new Connect();
-    Connection cnn = cn.getConnect();
 
     public TimHangHDX(String mahang) {
-        FormBanHang bh=new FormBanHang();
-
-//        String ten = null,soluong = null,trongluong = null,donvi = null,ngaysx = null,hsd = null,donggia;
-     String sql = "select * from hanghoa where mahanghoa=?";
+        String sql = "Select * from hanghoa where mahanghoa=?";
         try {
-            
-            stm = cnn.prepareStatement(sql);
+            FormBanHang bh = new FormBanHang();
+
+            stm = cn.prepareStatement(sql);
             stm.setString(1, mahang);
             rs = stm.executeQuery();
-                      //String mahang, String ten, String soluong, String trongluong, String donvi, String ngaysx, String hsx, String hsd, String dongia
             while (rs.next()) {
-           bh.Tim(mahang, rs.getString(2), rs.getInt(7), rs.getString(3), rs.getString(4)
-                        , rs.getString(5), rs.getString(6), rs.getString(8));
-                
-        }} catch (SQLException ex) {
-            Logger.getLogger(FormQuanLy.class.getName()).log(Level.SEVERE, null, ex);
+              //  bh.Tim(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
+
+            }
+            stm.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(TimHangHDX.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
+
     }
+
 }

@@ -30,6 +30,8 @@ public class FormThemNhanVien extends javax.swing.JFrame {
      */
     public FormThemNhanVien() {
         initComponents();
+        txtSDT.setDocument(new DigitsDocument()); 
+        txtmaNhanVien.setDocument(new DigitsDocument()); 
     }
 
     /**

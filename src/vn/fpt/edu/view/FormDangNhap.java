@@ -139,6 +139,7 @@ Menu m=new Menu();
        Check c=new Check();
         String pass=new String(txtmatkhau.getPassword());
 c.check(txtTaiKhoan.getText(), pass);
+
         }
     }//GEN-LAST:event_txtmatkhauKeyReleased
    public String getTaikhoan(){

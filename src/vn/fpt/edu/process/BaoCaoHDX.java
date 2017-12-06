@@ -28,14 +28,14 @@ import vn.fpt.edu.connect.Connect;
  *
  * @author Admin
  */
-public class XuatHDX {
+public class BaoCaoHDX {
 
     PreparedStatement stm = null;
     ResultSet rs = null;
     Connect cn = new Connect();
     Connection cnn = cn.getConnect();
 
-    public XuatHDX(int mahdx) throws IOException, WriteException {
+    public BaoCaoHDX(int mahdx) throws IOException, WriteException {
          WritableWorkbook workbook = Workbook.createWorkbook(new File("D:/hoadonxuat/"+mahdx+".xls"));
         WritableSheet sheet = workbook.createSheet("My Sheet", 0);
         // Create cell font and format

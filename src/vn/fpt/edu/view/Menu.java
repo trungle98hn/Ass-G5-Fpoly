@@ -31,7 +31,6 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbltk = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         file = new javax.swing.JMenu();
         QuanLy = new javax.swing.JCheckBoxMenuItem();
@@ -45,8 +44,6 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý bán hàng siêu thị mini");
-
-        lbltk.setText("jLabel1");
 
         file.setMnemonic('f');
         file.setText("tài khoản");
@@ -129,17 +126,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(312, 312, 312)
-                .addComponent(lbltk)
-                .addContainerGap(554, Short.MAX_VALUE))
+            .addGap(0, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(lbltk)
-                .addContainerGap(329, Short.MAX_VALUE))
+            .addGap(0, 498, Short.MAX_VALUE)
         );
 
         pack();
@@ -158,7 +149,7 @@ public class Menu extends javax.swing.JFrame {
        
         FormTaiKhoan t = new FormTaiKhoan();
         FormDangNhap m=new FormDangNhap();
-      lbltk.setText(m.getTaikhoan());
+     
         t.setVisible(true);
         t.setSize(900, 500);
         t.setLocationRelativeTo(null);
@@ -248,7 +239,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu file;
     private javax.swing.JMenu functionMenu;
     private javax.swing.JMenuItem khohang;
-    private javax.swing.JLabel lbltk;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     // End of variables declaration//GEN-END:variables

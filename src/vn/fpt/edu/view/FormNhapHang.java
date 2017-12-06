@@ -57,6 +57,9 @@ public class FormNhapHang extends javax.swing.JFrame {
         head.add("Số lượng");
         head.add("Đơn giá");
         head.add("Thành tiền");
+        txtDonGia.setDocument(new DigitsDocument()); 
+        txtMaHang.setDocument(new DigitsDocument()); 
+        
     }
 
     /**
@@ -90,7 +93,6 @@ public class FormNhapHang extends javax.swing.JFrame {
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
-        btnLuu = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -237,9 +239,6 @@ public class FormNhapHang extends javax.swing.JFrame {
         btnXoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnXoa.setText("Xóa");
 
-        btnLuu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnLuu.setText("Lưu");
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -290,10 +289,7 @@ public class FormNhapHang extends javax.swing.JFrame {
                             .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
                     .addGroup(pnlBottomLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
-                    .addGroup(pnlBottomLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLuu, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)))
+                        .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -315,9 +311,7 @@ public class FormNhapHang extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnSua)
                         .addGap(27, 27, 27)
-                        .addComponent(btnXoa)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnLuu)))
+                        .addComponent(btnXoa)))
                 .addGap(18, 18, 18)
                 .addGroup(pnlBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -525,7 +519,6 @@ addhang();
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;

@@ -17,13 +17,13 @@ import javax.swing.JOptionPane;
 import vn.fpt.edu.beans.users;
 import vn.fpt.edu.connect.Connect;
 import vn.fpt.edu.process.SuaNhanVien;
-import vn.fpt.edu.process.*;
+import vn.fpt.edu.process.getManv;
 
 /**
  *
  * @author Admin
  */
-public class FormSuaUsers extends javax.swing.JFrame {
+public class FormTimUser extends javax.swing.JFrame {
 
     Connect cnn = new Connect();
     Connection cn = cnn.getConnect();
@@ -33,10 +33,9 @@ public class FormSuaUsers extends javax.swing.JFrame {
     /**
      * Creates new form FormSuaUsers
      */
-    public FormSuaUsers() {
+    public FormTimUser() {
         initComponents();
-txtSDT.setDocument(new DigitsDocument()); 
-txtMaNhanVien.setDocument(new DigitsDocument()); 
+
     }
 
     public String getmanv(String manv) {
@@ -63,7 +62,6 @@ txtMaNhanVien.setDocument(new DigitsDocument());
         lblDiaChi = new javax.swing.JLabel();
         lblSDT = new javax.swing.JLabel();
         lblChucVu = new javax.swing.JLabel();
-        btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         txtMaNhanVien = new javax.swing.JTextField();
         txtSDT = new javax.swing.JTextField();
@@ -105,14 +103,6 @@ txtMaNhanVien.setDocument(new DigitsDocument());
         lblChucVu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblChucVu.setText("Chức Vụ");
 
-        btnSave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnSave.setText("lưu");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -145,63 +135,58 @@ txtMaNhanVien.setDocument(new DigitsDocument());
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNgaySinh)
+                                    .addComponent(lblDiaChi)
+                                    .addComponent(lblGioiTinh))
+                                .addGap(56, 56, 56)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jRadioButton1)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(jRadioButton2)
+                                        .addGap(56, 144, Short.MAX_VALUE))
+                                    .addComponent(txtDiaChi)
+                                    .addComponent(jTextField1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSDT)
+                                    .addComponent(lblChucVu))
                                 .addGap(65, 65, 65)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSDT)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblNgaySinh)
-                                            .addComponent(lblDiaChi)
-                                            .addComponent(lblGioiTinh))
-                                        .addGap(56, 56, 56)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(19, 19, 19)
-                                                .addComponent(jRadioButton1)
-                                                .addGap(32, 32, 32)
-                                                .addComponent(jRadioButton2)
-                                                .addGap(56, 144, Short.MAX_VALUE))
-                                            .addComponent(txtDiaChi)
-                                            .addComponent(jTextField1)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblSDT)
-                                            .addComponent(lblChucVu))
-                                        .addGap(65, 65, 65)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtSDT)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cbbChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
+                                        .addComponent(cbbChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTenNhanVien)
+                                .addGap(31, 31, 31)
+                                .addComponent(txtTaiKhoan5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblMatKhau)
+                                .addGap(62, 62, 62)
+                                .addComponent(txtMatKhau))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblTenNhanVien)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(txtTaiKhoan5))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lblMatKhau)
-                                        .addGap(62, 62, 62)
-                                        .addComponent(txtMatKhau))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblTenTaiKhoan1)
-                                            .addComponent(lblNhanVien))
-                                        .addGap(32, 32, 32)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtMaNhanVien)
-                                            .addComponent(txtTenNhanVien))))))
-                        .addGap(119, 119, 119))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(btnSave)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnBack)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(0, 0, 0))
+                                    .addComponent(lblTenTaiKhoan1)
+                                    .addComponent(lblNhanVien))
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMaNhanVien)
+                                    .addComponent(txtTenNhanVien))))))
+                .addGap(119, 119, 119))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(261, 261, 261)
+                .addComponent(btnBack)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,32 +229,12 @@ txtMaNhanVien.setDocument(new DigitsDocument());
                     .addComponent(lblChucVu)
                     .addComponent(cbbChucVU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnBack))
+                .addComponent(btnBack)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-String chucvu,gioitinh;
-        if(cbbChucVU.getSelectedIndex()==0){
-            chucvu="Quản lý";
-        }
-        else {
-        chucvu="Nhân Viên";
-        }
-        if(jRadioButton1.isSelected()){
-            gioitinh="nam";
-        }
-        else{
-            gioitinh="nữ";
-        }
-        SuaNhanVien snv=new SuaNhanVien(txtMaNhanVien.getText(), txtTenNhanVien.getText(), txtSDT.getText(), txtDiaChi.getText(),jTextField1.getText(),chucvu , txtMatKhau.getText(), txtTaiKhoan5.getText(), gioitinh);
-
-    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -311,7 +276,6 @@ String chucvu,gioitinh;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbbChucVU;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;

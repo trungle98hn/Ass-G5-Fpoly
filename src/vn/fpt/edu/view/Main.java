@@ -16,10 +16,10 @@ import vn.fpt.edu.beans.dangnhap;
 public class Main {
     public static void main(String[] args) {
           
-        Menu m = new Menu();
+        FormDangNhap m = new FormDangNhap();
       
         m.setTitle("Quản lý siêu thị mini");
-        m.setSize(1000,700);
+        m.setSize(400,400);
         m.setResizable(false);
         m.setLocationRelativeTo(null);
         m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

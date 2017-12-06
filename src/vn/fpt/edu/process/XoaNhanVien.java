@@ -32,7 +32,7 @@ public class XoaNhanVien {
             
             JOptionPane.showMessageDialog(null, "đã xóa");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "ko thể xóa tk đang đăng nhập");
         }
     }
     

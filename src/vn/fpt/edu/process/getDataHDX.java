@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vn.fpt.edu.beans.ChiTietHDX;
 import vn.fpt.edu.connect.Connect;
@@ -50,6 +51,7 @@ Vector head1=new Vector();
         } catch (SQLException ex) {
             System.out.println(ex);
             Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "chưa có hàng để thêm");
         }
     return head1;
     }

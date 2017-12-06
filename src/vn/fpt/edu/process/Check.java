@@ -36,7 +36,7 @@ public class Check {
 
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-
+                System.out.println(user);
                 if (rs.getString(1).equals(user) && rs.getString(2
                 ).equals(pass) && rs.getString(3).equals("Quản lý")) {
                     JOptionPane.showMessageDialog(null, "Login sucess");
@@ -77,7 +77,9 @@ public class Check {
 return idd;
     }
 
-    public void info() {
-        String sql = "select * from users";
+    public String  info() {
+       FormDangNhap c=new FormDangNhap();
+  String mauser=     c.getTaikhoan();
+       return mauser;
     }
 }

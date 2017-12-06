@@ -70,11 +70,11 @@ public class TinhTienHDX {
         } catch (SQLException ex) {
             Logger.getLogger(FormBanHang.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        
+ 
         FormBanHang t = new FormBanHang();
+        //t.close();
         t.setVisible(true);
-        t.setSize(900, 500);
+        t.setSize(1000, 700);
         t.setLocationRelativeTo(null);
 
     }

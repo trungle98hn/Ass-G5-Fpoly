@@ -5,10 +5,15 @@
  */
 package vn.fpt.edu.view;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vn.fpt.edu.process.HoaDonXuat;
 import vn.fpt.edu.process.*;
@@ -18,8 +23,9 @@ import vn.fpt.edu.process.*;
  * @author Le Huy
  */
 public class FormBaoCao extends javax.swing.JFrame {
- Vector head=new Vector();
-        
+
+    Vector head = new Vector();
+
     /**
      * Creates new form BanHangView
      */
@@ -30,6 +36,7 @@ public class FormBaoCao extends javax.swing.JFrame {
         head.add("Người Xuất");
         head.add("Giá trị");
         fullhoadon();
+        txtTim.setDocument(new DigitsDocument());
     }
 
     /**
@@ -110,6 +117,11 @@ public class FormBaoCao extends javax.swing.JFrame {
 
         btnInHoaDon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnInHoaDon.setText("In hóa đơn");
+        btnInHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInHoaDonActionPerformed(evt);
+            }
+        });
 
         txtTim.setToolTipText("tìm theo mã hóa đơn");
 
@@ -246,7 +258,7 @@ public class FormBaoCao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
-       loc();
+        loc();
     }//GEN-LAST:event_btnLocActionPerformed
 
     private void cbNhapXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNhapXuatActionPerformed
@@ -257,65 +269,91 @@ public class FormBaoCao extends javax.swing.JFrame {
         // TODO add your handling code here:
         timkiem();
     }//GEN-LAST:event_btnTimActionPerformed
+
+    private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        int i = chooser.showSaveDialog(chooser);
+        if (i == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                FileWriter out = new FileWriter(file + ".xls");
+                BufferedWriter bwrite = new BufferedWriter(out);
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                // ten Cot
+                for (int j = 0; j < jTable2.getColumnCount(); j++) {
+                    bwrite.write(model.getColumnName(j) + "\t");
+                }
+                bwrite.write("\n");
+                // Lay du lieu dong
+                for (int j = 0; j < jTable2.getRowCount(); j++) {
+                    for (int k = 0; k < jTable2.getColumnCount(); k++) {
+                        bwrite.write(model.getValueAt(j, k) + "\t");
+                    }
+                    bwrite.write("\n");
+                }
+                bwrite.close();
+                JOptionPane.showMessageDialog(null, "Lưu file thành công!");
+            } catch (Exception e2) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi lưu file!");
+            }
+        }
+    }//GEN-LAST:event_btnInHoaDonActionPerformed
     public void fullhoadon() {
         String sql;
-        Vector data=new Vector();
-       
-        if(cbNhapXuat.getSelectedIndex()==0){
-            sql="Select * from hoadonnhap";
-            HoaDonXuat hdx=new HoaDonXuat();
-        data=hdx.fullHoaDonXuat(sql);
-       jTable2.setModel(new DefaultTableModel(data, head));
+        Vector data = new Vector();
+
+        if (cbNhapXuat.getSelectedIndex() == 0) {
+            sql = "Select * from hoadonnhap";
+            HoaDonXuat hdx = new HoaDonXuat();
+            data = hdx.fullHoaDonXuat(sql);
+            jTable2.setModel(new DefaultTableModel(data, head));
+        } else {
+            sql = "select * from hoadonxuat";
+            HoaDonXuat hdx = new HoaDonXuat();
+            data = hdx.fullHoaDonXuat(sql);
+            jTable2.setModel(new DefaultTableModel(data, head));
         }
-        else{
-            sql="select * from hoadonxuat";
-            HoaDonXuat hdx=new HoaDonXuat();
-        data=hdx.fullHoaDonXuat(sql);
-       jTable2.setModel(new DefaultTableModel(data, head));
-        }
-        
+
     }
-    public void loc(){
-           String sql;
-        Vector data=new Vector();
-       DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-     
+
+    public void loc() {
+        String sql;
+        Vector data = new Vector();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         String goidate = dateFormat.format(jDateChooser1.getDate());
         String goidate2 = dateFormat.format(jDateChooser2.getDate());
-        if(cbNhapXuat.getSelectedIndex()==0){
-            sql="Select * from hoadonnhap where ngaynhap between '"+goidate+"' and '"+goidate2+"' ";
-            HoaDonXuat hdx=new HoaDonXuat();
-        data=hdx.locHoaDonXuat(sql);
+        if (cbNhapXuat.getSelectedIndex() == 0) {
+            sql = "Select * from hoadonnhap where ngaynhap between '" + goidate + "' and '" + goidate2 + "' ";
+            HoaDonXuat hdx = new HoaDonXuat();
+            data = hdx.locHoaDonXuat(sql);
             System.out.println(sql);
-       jTable2.setModel(new DefaultTableModel(data, head));
+            jTable2.setModel(new DefaultTableModel(data, head));
+        } else {
+            sql = "Select * from hoadonxuat where ngayxuat between '" + goidate + "' and '" + goidate2 + "' ";
+            HoaDonXuat hdx = new HoaDonXuat();
+
+            data = hdx.locHoaDonXuat(sql);
+            System.out.println(sql);
+            jTable2.setModel(new DefaultTableModel(data, head));
         }
-        else{
-            sql="Select * from hoadonxuat where ngayxuat between '"+goidate+"' and '"+goidate2+"' ";
-            HoaDonXuat hdx=new HoaDonXuat();
-            
-        data=hdx.locHoaDonXuat(sql);
-         System.out.println(sql);
-       jTable2.setModel(new DefaultTableModel(data, head));
-        }
-        
-    
+
     }
-    public void timkiem(){
-        Vector data=new Vector();
-         if(cbNhapXuat.getSelectedIndex()==0)
-         {
-    String sql="select * from hoadonxuat where mahdx="+txtTim.getText()+"";
-     HoaDonXuat hdx=new HoaDonXuat();
-        data=hdx.fullHoaDonXuat(sql);
-       jTable2.setModel(new DefaultTableModel(data, head));
-         }
-         else
-         {
-         String sql="select * from hoadonxuat where mahdx="+txtTim.getText()+"";
-          HoaDonXuat hdx=new HoaDonXuat();
-        data=hdx.fullHoaDonXuat(sql);
-       jTable2.setModel(new DefaultTableModel(data, head));
-         }
+
+    public void timkiem() {
+        Vector data = new Vector();
+        if (cbNhapXuat.getSelectedIndex() == 0) {
+            String sql = "select * from hoadonxuat where mahdx=" + txtTim.getText() + "";
+            HoaDonXuat hdx = new HoaDonXuat();
+            data = hdx.fullHoaDonXuat(sql);
+            jTable2.setModel(new DefaultTableModel(data, head));
+        } else {
+            String sql = "select * from hoadonxuat where mahdx=" + txtTim.getText() + "";
+            HoaDonXuat hdx = new HoaDonXuat();
+            data = hdx.fullHoaDonXuat(sql);
+            jTable2.setModel(new DefaultTableModel(data, head));
+        }
     }
     /**
      * @param args the command line arguments

@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import vn.fpt.edu.process.*;
 
 /**
  *
@@ -33,6 +34,9 @@ public class FormSuaNhanVien extends FormQuanLy{
     public FormSuaNhanVien() {
         initComponents();
        // getdata();
+       txtMaNhanVien.setDocument(new DigitsDocument()); 
+       txtSDT.setDocument(new DigitsDocument()); 
+       
     }
 
     /**
